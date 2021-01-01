@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 const ballRadius = 7;
 
 const itemColor = "#6c9950"; //green
-const myFont = "8px PressStart2P";
+const myFont = "2rem PressStart2P";
 
 let x = canvas.width / 2;
 let y = canvas.height - 30;
@@ -82,7 +82,7 @@ function collisionDetection() {
           b.status = 0;
           score++;
           if (score === brickRowCount * brickColumnCount) {
-            alert("You Win!");
+            console.log("You Win!");
             document.location.reload();
           }
         }
@@ -157,7 +157,7 @@ function draw() {
     } else {
       lives--;
       if (!lives) {
-        alert("Game Over");
+        console.log("Game Over");
         document.location.reload();
       } else {
         x = canvas.width / 2;
