@@ -1,10 +1,10 @@
-// grab elements and init variables
+// || Variables
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-const ballRadius = 7;
+const ballRadius = 6;
 
 const itemColor = "#6c9950"; //green
-const myFont = "2rem PressStart2P";
+const myFont = "1rem PressStart2P";
 
 let x = canvas.width / 2;
 let y = canvas.height - 30;
@@ -12,16 +12,16 @@ let dx = 2;
 let dy = -2;
 
 const paddleHeight = 10;
-const paddleWidth = 75;
+const paddleWidth = 50;
 let paddleX = (canvas.width - paddleWidth) / 2;
 
 let rightPressed = false;
 let leftPressed = false;
-let brickRowCount = 3;
-let brickColumnCount = 3;
-const brickWidth = 75;
-const brickHeight = 20;
-const brickPadding = 10;
+let brickRowCount = 7;
+let brickColumnCount = 5;
+const brickWidth = 30;
+const brickHeight = 12;
+const brickPadding = 2;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
 
@@ -40,33 +40,33 @@ for (let c = 0; c < brickColumnCount; c++) {
   }
 }
 
+// || Event listeners
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
-document.addEventListener("mousemove", mouseMoveHandler, false);
 
+// || Functions
+
+//move paddle left or right on arrow key press
 function keyDownHandler(e) {
   if (e.code === "ArrowRight") {
     rightPressed = true;
   } else if (e.code === "ArrowLeft") {
     leftPressed = true;
+  } else if (e.code === "ArrowUp" || "ArrowDown") {
+    e.preventDefault(); //prevent canvas from moving if user accidentally presses up or down key
   }
 }
 
+//stop moving paddle when arrow key released
 function keyUpHandler(e) {
   if (e.code === "ArrowRight") {
     rightPressed = false;
   } else if (e.code === "ArrowLeft") {
-    leftPressed = true;
+    leftPressed = false;
   }
 }
 
-function mouseMoveHandler(e) {
-  let relativeX = e.clientX - canvas.offsetLeft;
-  if (relativeX > 0 && relativeX < canvas.width) {
-    paddleX = relativeX - paddleWidth / 2;
-  }
-}
-
+//detect ball collision
 function collisionDetection() {
   for (let c = 0; c < brickColumnCount; c++) {
     for (let r = 0; r < brickRowCount; r++) {
@@ -82,7 +82,7 @@ function collisionDetection() {
           b.status = 0;
           score++;
           if (score === brickRowCount * brickColumnCount) {
-            console.log("You Win!");
+            alert("You Win!");
             document.location.reload();
           }
         }
@@ -91,6 +91,7 @@ function collisionDetection() {
   }
 }
 
+//draw ball on canvas
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
@@ -99,6 +100,7 @@ function drawBall() {
   ctx.closePath();
 }
 
+//draw paddle on canvas
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
@@ -107,6 +109,7 @@ function drawPaddle() {
   ctx.closePath();
 }
 
+//draw brick rows and colums on canvas
 function drawBricks() {
   for (let c = 0; c < brickColumnCount; c++) {
     for (let r = 0; r < brickRowCount; r++) {
@@ -125,18 +128,21 @@ function drawBricks() {
   }
 }
 
+//draw score on canvas
 function drawScore() {
   ctx.font = myFont;
   ctx.fillStyle = itemColor;
-  ctx.fillText("Score: " + score, 8, 20);
+  ctx.fillText("Score: " + score, 8, 15);
 }
 
+//draw lives on canvas
 function drawLives() {
   ctx.font = myFont;
   ctx.fillStyle = itemColor;
-  ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
+  ctx.fillText("Lives: " + lives, canvas.width - 72, 15);
 }
 
+//master function
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBricks();
@@ -157,7 +163,7 @@ function draw() {
     } else {
       lives--;
       if (!lives) {
-        console.log("Game Over");
+        alert("Game Over");
         document.location.reload();
       } else {
         x = canvas.width / 2;
@@ -180,4 +186,5 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
+//start game when page loads
 draw();
