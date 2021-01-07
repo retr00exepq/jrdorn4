@@ -22,10 +22,42 @@ html {
   box-sizing: inherit;
 }
 
-/* || Canvas styling */
+/* || Game */
+
+body {
+  background: #1e1e1e;
+  display: grid;
+  grid-template-areas: "scorelives" "myCanvas";
+}
+
+#myCanvas {
+  display: flex;
+  justify-content: center;
+}
 
 canvas {
+  margin-top: 5em;
   background: #1e1e1e;
-  width: 100vw;
-  height: 100vh;
+  width: 95vw;
+}
+
+/* display score and lives */
+
+#scorelives {
+  font-family: PressStart2P;
+  color: #6c9950;
+  font-size: 2rem;
+  margin: 1em;
+  margin-bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#score {
+  margin-right: auto;
+}
+
+#lives {
+  margin-right: 2em;
 }

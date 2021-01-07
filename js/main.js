@@ -4,7 +4,10 @@ const ctx = canvas.getContext("2d");
 const ballRadius = 6;
 
 const itemColor = "#6c9950"; //green
-const myFont = "1rem PressStart2P";
+const myFont = "2rem PressStart2P";
+
+const myScore = document.querySelector("#score");
+const myLives = document.querySelector("#lives");
 
 let x = canvas.width / 2;
 let y = canvas.height - 30;
@@ -48,12 +51,11 @@ document.addEventListener("keyup", keyUpHandler, false);
 
 //move paddle left or right on arrow key press
 function keyDownHandler(e) {
+  e.preventDefault(); //prevent page from moving
   if (e.code === "ArrowRight") {
     rightPressed = true;
   } else if (e.code === "ArrowLeft") {
     leftPressed = true;
-  } else if (e.code === "ArrowUp" || "ArrowDown") {
-    e.preventDefault(); //prevent canvas from moving if user accidentally presses up or down key
   }
 }
 
@@ -128,18 +130,14 @@ function drawBricks() {
   }
 }
 
-//draw score on canvas
+//display score above canvas
 function drawScore() {
-  ctx.font = myFont;
-  ctx.fillStyle = itemColor;
-  ctx.fillText("Score: " + score, 8, 15);
+  myScore.innerHTML = `Score: ${score}`;
 }
 
-//draw lives on canvas
+//display lives above canvas
 function drawLives() {
-  ctx.font = myFont;
-  ctx.fillStyle = itemColor;
-  ctx.fillText("Lives: " + lives, canvas.width - 72, 15);
+  myLives.innerHTML = `Lives: ${lives}`;
 }
 
 //master function
