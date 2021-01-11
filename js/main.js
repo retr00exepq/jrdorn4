@@ -137,7 +137,16 @@ function drawScore() {
 
 //display lives above canvas
 function drawLives() {
-  myLives.innerHTML = `Lives: ${lives}`;
+  myLives.innerHTML = `Lives: ${drawHearts()}`;
+}
+
+//display hearts to count lives
+function drawHearts() {
+  let str = "";
+  for (let i = 0; i < lives; i++) {
+    str += '<img class="heart" src="img/heart.png" />';
+  }
+  return str;
 }
 
 //master function
