@@ -7,7 +7,7 @@ const itemColor = "#6c9950"; //green
 const myFont = "2rem PressStart2P";
 
 const myScore = document.querySelector("#score");
-const myLives = document.querySelector("#lives");
+const myLives = document.querySelector("#hearts");
 
 let x = canvas.width / 2;
 let y = canvas.height - 30;
@@ -94,6 +94,10 @@ function collisionDetection() {
 }
 
 //draw ball on canvas
+let img = new Image();
+img.src = "img/ball.png";
+console.log(img);
+
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
@@ -137,7 +141,7 @@ function drawScore() {
 
 //display lives above canvas
 function drawLives() {
-  myLives.innerHTML = `Lives: ${drawHearts()}`;
+  myLives.innerHTML = `${drawHearts()}`;
 }
 
 //display hearts to count lives
