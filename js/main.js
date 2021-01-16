@@ -84,7 +84,7 @@ function collisionDetection() {
           b.status = 0;
           score++;
           if (score === brickRowCount * brickColumnCount) {
-            alert("You Win!");
+            console.log("You Win!");
             document.location.reload();
           }
         }
@@ -96,14 +96,9 @@ function collisionDetection() {
 //draw ball on canvas
 let img = new Image();
 img.src = "img/ball.png";
-console.log(img);
 
 function drawBall() {
-  ctx.beginPath();
-  ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-  ctx.fillStyle = itemColor;
-  ctx.fill();
-  ctx.closePath();
+  ctx.drawImage(img, x, y);
 }
 
 //draw paddle on canvas
@@ -139,18 +134,13 @@ function drawScore() {
   myScore.innerHTML = `Score: ${score}`;
 }
 
-//display lives above canvas
-function drawLives() {
-  myLives.innerHTML = `${drawHearts()}`;
-}
-
 //display hearts to count lives
-function drawHearts() {
+function drawLives() {
   let str = "";
   for (let i = 0; i < lives; i++) {
     str += '<img class="heart" src="img/heart.png" />';
   }
-  return str;
+  myLives.innerHTML = str;
 }
 
 //master function
@@ -174,7 +164,7 @@ function draw() {
     } else {
       lives--;
       if (!lives) {
-        alert("Game Over");
+        console.log("Game Over");
         document.location.reload();
       } else {
         x = canvas.width / 2;
