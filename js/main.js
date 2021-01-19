@@ -1,7 +1,7 @@
 // || Variables
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
-const ballRadius = 6;
+const ballRadius = 15;
 
 const itemColor = "#6c9950"; //green
 const myFont = "2rem PressStart2P";
@@ -9,8 +9,10 @@ const myFont = "2rem PressStart2P";
 const myScore = document.querySelector("#score");
 const myLives = document.querySelector("#hearts");
 
+//x and y coordinates of ball
 let x = canvas.width / 2;
 let y = canvas.height - 30;
+
 let dx = 2;
 let dy = -2;
 
@@ -25,8 +27,8 @@ let brickColumnCount = 5;
 const brickWidth = 30;
 const brickHeight = 12;
 const brickPadding = 2;
-const brickOffsetTop = 30;
-const brickOffsetLeft = 30;
+const brickOffsetTop = 1;
+const brickOffsetLeft = 40;
 
 let score = 0;
 let lives = 3;

@@ -4,7 +4,7 @@ Break It is a JavaScipt block breaker game. Users move a paddle back
 and forth across the screen to hit a ball to break bricks while avoiding letting the ball drop.
 
 I drew design inspiration from Atari's arcade game Breakout, and
-end3r's [game development workshop](https://github.com/end3r/Gamedev-Canvas-workshop/blob/gh-pages/lesson10.html).
+end3r's [game development workshop](https://github.com/end3r/Gamedev-Canvas-workshop/blob/gh-pages/lesson10.html). Sounds effects are provided by [Juhani Junkala](https://juhanijunkala.com/).
 
 ## Status
 
