@@ -9,6 +9,21 @@ const myFont = "2rem PressStart2P";
 const myScore = document.querySelector("#score");
 const myLives = document.querySelector("#hearts");
 
+//sound effects
+const startSound = new Audio("audio/start.wav");
+const winSound = new Audio("audio/win.wav");
+const loseSound = new Audio("audio/lose.wav");
+const dropSound = new Audio("audio/drop.wav");
+const wallSound = new Audio("audio/wall.wav");
+
+const brickSound1 = new Audio("audio/brick1.wav");
+const brickSound2 = new Audio("audio/brick2.wav");
+const brickSound3 = new Audio("audio/brick3.wav");
+const brickSound4 = new Audio("audio/brick4.wav");
+const brickSound5 = new Audio("audio/brick5.wav");
+
+//const paddleSound = new Audio("audio/paddle.wav");
+
 //x and y coordinates of ball
 let x = canvas.width / 2;
 let y = canvas.height - 30;
@@ -24,10 +39,11 @@ let rightPressed = false;
 let leftPressed = false;
 let brickRowCount = 7;
 let brickColumnCount = 5;
+
 const brickWidth = 30;
 const brickHeight = 12;
 const brickPadding = 2;
-const brickOffsetTop = 1;
+const brickOffsetTop = 20;
 const brickOffsetLeft = 40;
 
 let score = 0;
@@ -70,6 +86,14 @@ function keyUpHandler(e) {
   }
 }
 
+//play a random sound on brick collision
+function randomBrick() {
+  let random = Math.floor(Math.random() * (6 - 1)) + 1;
+  random = random.toString();
+  console.log(`brickSound${random}.play();`);
+  return Function(`brickSound${random}.play();`)();
+}
+
 //detect ball collision
 function collisionDetection() {
   for (let c = 0; c < brickColumnCount; c++) {
@@ -82,11 +106,13 @@ function collisionDetection() {
           y > b.y &&
           y < b.y + brickHeight
         ) {
+          randomBrick();
           dy = -dy;
           b.status = 0;
           score++;
           if (score === brickRowCount * brickColumnCount) {
-            console.log("You Win!");
+            winSound.play();
+            alert("You Win!");
             document.location.reload();
           }
         }
@@ -155,18 +181,25 @@ function draw() {
   drawLives();
   collisionDetection();
 
+  //ball bounces off side wall
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+    wallSound.play();
     dx = -dx;
   }
+  //ball bounces off top wall
   if (y + dy < ballRadius) {
+    wallSound.play();
     dy = -dy;
   } else if (y + dy > canvas.height - ballRadius) {
     if (x > paddleX && x < paddleX + paddleWidth) {
       dy = -dy;
     } else {
+      //ball hit ground
+      dropSound.play();
       lives--;
       if (!lives) {
-        console.log("Game Over");
+        loseSound.play();
+        alert("Game Over");
         document.location.reload();
       } else {
         x = canvas.width / 2;
@@ -189,5 +222,10 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
-//start game when page loads
-draw();
+//press space bar to start game
+document.body.onkeyup = function (e) {
+  if (e.keyCode === 32) {
+    startSound.play();
+    draw();
+  }
+};
