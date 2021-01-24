@@ -8,6 +8,7 @@ const myFont = "2rem PressStart2P";
 
 const myScore = document.querySelector("#score");
 const myLives = document.querySelector("#hearts");
+const livesDisplay = document.querySelector("#lives");
 
 //sound effects
 const startSound = new Audio("audio/start.wav");
@@ -15,6 +16,7 @@ const winSound = new Audio("audio/win.wav");
 const loseSound = new Audio("audio/lose.wav");
 const dropSound = new Audio("audio/drop.wav");
 const wallSound = new Audio("audio/wall.wav");
+const paddleSound = new Audio("audio/paddle.wav");
 
 const brickSound1 = new Audio("audio/brick1.wav");
 const brickSound2 = new Audio("audio/brick2.wav");
@@ -22,28 +24,25 @@ const brickSound3 = new Audio("audio/brick3.wav");
 const brickSound4 = new Audio("audio/brick4.wav");
 const brickSound5 = new Audio("audio/brick5.wav");
 
-//const paddleSound = new Audio("audio/paddle.wav");
-
 //x and y coordinates of ball
 let x = canvas.width / 2;
 let y = canvas.height - 30;
 
-let dx = 2;
-let dy = -2;
+let dx = 3;
+let dy = -3;
 
 const paddleHeight = 10;
-const paddleWidth = 50;
+const paddleWidth = 60;
 let paddleX = (canvas.width - paddleWidth) / 2;
 
 let rightPressed = false;
 let leftPressed = false;
-let brickRowCount = 7;
-let brickColumnCount = 5;
+let brickRowCount = 1;
+let brickColumnCount = 1;
 
 const brickWidth = 30;
 const brickHeight = 12;
 const brickPadding = 2;
-const brickOffsetTop = 20;
 const brickOffsetLeft = 40;
 
 let score = 0;
@@ -90,11 +89,10 @@ function keyUpHandler(e) {
 function randomBrick() {
   let random = Math.floor(Math.random() * (6 - 1)) + 1;
   random = random.toString();
-  console.log(`brickSound${random}.play();`);
   return Function(`brickSound${random}.play();`)();
 }
 
-//detect ball collision
+//detect brick collision
 function collisionDetection() {
   for (let c = 0; c < brickColumnCount; c++) {
     for (let r = 0; r < brickRowCount; r++) {
@@ -106,10 +104,12 @@ function collisionDetection() {
           y > b.y &&
           y < b.y + brickHeight
         ) {
+          //handle brick collision
           randomBrick();
           dy = -dy;
           b.status = 0;
           score++;
+          //level won when all bricks are smashed
           if (score === brickRowCount * brickColumnCount) {
             winSound.play();
             alert("You Win!");
@@ -144,7 +144,7 @@ function drawBricks() {
     for (let r = 0; r < brickRowCount; r++) {
       if (bricks[c][r].status === 1) {
         let brickX = r * (brickWidth + brickPadding) + brickOffsetLeft;
-        let brickY = c * (brickHeight + brickPadding) + brickOffsetTop;
+        let brickY = c * (brickHeight + brickPadding);
         bricks[c][r].x = brickX;
         bricks[c][r].y = brickY;
         ctx.beginPath();
@@ -173,7 +173,9 @@ function drawLives() {
 
 //master function
 function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  canvas.width = 600;
+  canvas.height = 350;
+  ctx.clearRect(0, 0, canvas.width, canvas.width);
   drawBricks();
   drawBall();
   drawPaddle();
@@ -187,11 +189,13 @@ function draw() {
     dx = -dx;
   }
   //ball bounces off top wall
-  if (y + dy < ballRadius) {
+  if (y + dy < 1) {
     wallSound.play();
     dy = -dy;
   } else if (y + dy > canvas.height - ballRadius) {
     if (x > paddleX && x < paddleX + paddleWidth) {
+      //paddle collision
+      paddleSound.play();
       dy = -dy;
     } else {
       //ball hit ground
@@ -211,10 +215,11 @@ function draw() {
     }
   }
 
+  //move paddle back and forth
   if (rightPressed && paddleX < canvas.width - paddleWidth) {
-    paddleX += 7;
+    paddleX += 5;
   } else if (leftPressed && paddleX > 0) {
-    paddleX -= 7;
+    paddleX -= 5;
   }
 
   x += dx;
@@ -225,6 +230,7 @@ function draw() {
 //press space bar to start game
 document.body.onkeyup = function (e) {
   if (e.keyCode === 32) {
+    livesDisplay.classList.remove("hidden");
     startSound.play();
     draw();
   }

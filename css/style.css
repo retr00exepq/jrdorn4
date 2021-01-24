@@ -36,10 +36,9 @@ body {
 }
 
 canvas {
-  margin-top: 15em;
+  margin-top: 5em;
   background: #1e1e1e;
-  width: 75vw;
-  max-width: 700px;
+  border: 5px solid blue;
 }
 
 /* display score and lives */
