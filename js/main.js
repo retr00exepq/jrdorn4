@@ -4,6 +4,9 @@ const ctx = canvas.getContext("2d");
 const ballRadius = 15;
 
 const itemColor = "#6c9950"; //green
+const brokenColor1 = "#509199"; //xxxx to display when brick hit twice
+const brokenColor2 = "#7D5099"; //xxxx to display when brick hit twice
+
 const myFont = "2rem PressStart2P";
 
 const myScore = document.querySelector("#score");
@@ -28,8 +31,8 @@ const brickSound5 = new Audio("audio/brick5.wav");
 let x = canvas.width / 2;
 let y = canvas.height - 30;
 
-let dx = 3;
-let dy = -3;
+let dx = 2;
+let dy = -2;
 
 const paddleHeight = 10;
 const paddleWidth = 60;
@@ -37,13 +40,13 @@ let paddleX = (canvas.width - paddleWidth) / 2;
 
 let rightPressed = false;
 let leftPressed = false;
-let brickRowCount = 1;
-let brickColumnCount = 1;
+let brickRowCount = 7;
+let brickColumnCount = 7;
 
 const brickWidth = 30;
 const brickHeight = 12;
-const brickPadding = 2;
-const brickOffsetLeft = 40;
+const brickPadding = 5;
+const brickOffsetLeft = 90;
 
 let score = 0;
 let lives = 3;
@@ -55,7 +58,7 @@ for (let c = 0; c < brickColumnCount; c++) {
     bricks[c][r] = {
       x: 0,
       y: 0,
-      status: 1,
+      status: 3,
     };
   }
 }
@@ -97,7 +100,7 @@ function collisionDetection() {
   for (let c = 0; c < brickColumnCount; c++) {
     for (let r = 0; r < brickRowCount; r++) {
       let b = bricks[c][r];
-      if (b.status === 1) {
+      if (b.status > 0) {
         if (
           x > b.x &&
           x < b.x + brickWidth &&
@@ -107,8 +110,10 @@ function collisionDetection() {
           //handle brick collision
           randomBrick();
           dy = -dy;
-          b.status = 0;
-          score++;
+          b.status--;
+          if (b.status === 0) {
+            score++;
+          }
           //level won when all bricks are smashed
           if (score === brickRowCount * brickColumnCount) {
             winSound.play();
@@ -142,14 +147,20 @@ function drawPaddle() {
 function drawBricks() {
   for (let c = 0; c < brickColumnCount; c++) {
     for (let r = 0; r < brickRowCount; r++) {
-      if (bricks[c][r].status === 1) {
+      if (bricks[c][r].status > 0) {
         let brickX = r * (brickWidth + brickPadding) + brickOffsetLeft;
         let brickY = c * (brickHeight + brickPadding);
         bricks[c][r].x = brickX;
         bricks[c][r].y = brickY;
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = itemColor;
+        if (bricks[c][r].status === 3) {
+          ctx.fillStyle = itemColor;
+        } else if (bricks[c][r].status === 2) {
+          ctx.fillStyle = brokenColor1;
+        } else {
+          ctx.fillStyle = brokenColor2;
+        }
         ctx.fill();
         ctx.closePath();
       }
@@ -173,8 +184,8 @@ function drawLives() {
 
 //master function
 function draw() {
-  canvas.width = 600;
-  canvas.height = 350;
+  canvas.width = 400;
+  canvas.height = 250;
   ctx.clearRect(0, 0, canvas.width, canvas.width);
   drawBricks();
   drawBall();
