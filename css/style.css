@@ -9,7 +9,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-size: 8px;
 }
 
 /* alternative box model */
@@ -22,7 +21,18 @@ html {
   box-sizing: inherit;
 }
 
+/* || Typography */
+
+html,
+body {
+  font-family: PressStart2P;
+  color: #6c9950;
+  font-size: 8px;
+}
+
 /* || Game */
+
+/* general game setup */
 
 body {
   background: #1e1e1e;
@@ -38,13 +48,12 @@ body {
 canvas {
   margin-top: 2em;
   background: #1e1e1e;
+  border: 2px solid snow;
 }
 
 /* display score and lives */
 
 #scorelives {
-  font-family: PressStart2P;
-  color: #6c9950;
   font-size: 2rem;
   margin-top: 1.5em;
   width: 100%;
@@ -74,6 +83,38 @@ canvas {
   margin-left: 5px;
 }
 
-.hidden {
+/* start screen  */
+
+#start {
+  display: grid;
+}
+
+#start > * {
+  letter-spacing: 0.25em;
+}
+
+h1 {
+  font-size: 6em;
+  justify-self: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+  justify-self: center;
+}
+
+h3 {
+  font-size: 1.25rem;
+  justify-self: center;
+}
+
+/* win screen */
+
+/* lose screen */
+
+/* hide screens  */
+
+.hidden,
+.hidden > * {
   display: none;
 }

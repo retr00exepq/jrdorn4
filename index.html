@@ -8,11 +8,33 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div id="myCanvas"><canvas></canvas></div>
+    <!-- Start screen -->
+    <div id="start" class="hidden">
+      <h1>BREAK IT</h1>
+      <h2>PRESS SPACE TO START</h2>
+      <h3>USE THE ARROW KEYS TO MOVE</h3>
+    </div>
+
+    <!-- Win screen -->
+    <div id="win" class="hidden">
+      <div>YOU WIN!</div>
+    </div>
+
+    <!-- Lose screen -->
+    <div id="lose" class="hidden">
+      <div>GAME OVER</div>
+    </div>
+
+    <!-- Canvas to draw game on -->
+    <div id="myCanvas"><canvas class="hidden"></canvas></div>
+
+    <!-- Container to display score and lives -->
     <div id="scorelives">
-      <span id="score"></span><span id="lives" class="hidden">Lives: </span
+      <span id="score"></span><span id="lives" class="hidden">LIVES: </span
       ><span id="hearts"></span>
     </div>
+
+    <!-- Scripts -->
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>

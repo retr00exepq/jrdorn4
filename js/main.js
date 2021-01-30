@@ -1,5 +1,7 @@
 // || Variables
 const canvas = document.querySelector("canvas");
+canvas.width = 400;
+canvas.height = 250;
 const ctx = canvas.getContext("2d");
 const ballRadius = 15;
 
@@ -7,11 +9,13 @@ const itemColor = "#6c9950"; //green
 const brokenColor1 = "#509199"; //xxxx to display when brick hit twice
 const brokenColor2 = "#7D5099"; //xxxx to display when brick hit twice
 
-const myFont = "2rem PressStart2P";
-
 const myScore = document.querySelector("#score");
 const myLives = document.querySelector("#hearts");
 const livesDisplay = document.querySelector("#lives");
+
+const startDisplay = document.querySelector("#start");
+const winDisplay = document.querySelector("#win");
+const loseDisplay = document.querySelector("#win");
 
 //sound effects
 const startSound = new Audio("audio/start.wav");
@@ -170,7 +174,7 @@ function drawBricks() {
 
 //display score above canvas
 function drawScore() {
-  myScore.innerHTML = `Score: ${score}`;
+  myScore.innerHTML = `SCORE: ${score}`;
 }
 
 //display hearts to count lives
@@ -182,10 +186,26 @@ function drawLives() {
   myLives.innerHTML = str;
 }
 
+//display start screen
+function startScreen() {
+  ctx.clearRect(0, 0, canvas.width, canvas.width);
+  startDisplay.classList.remove("hidden");
+}
+
+//display win screen
+function winScreen() {
+  ctx.clearRect(0, 0, canvas.width, canvas.width);
+  winDisplay.classList.remove("hidden");
+}
+
+// display lose sceen
+function loseScreen() {
+  ctx.clearRect(0, 0, canvas.width, canvas.width);
+  loseDisplay.classList.remove("hidden");
+}
+
 //master function
 function draw() {
-  canvas.width = 400;
-  canvas.height = 250;
   ctx.clearRect(0, 0, canvas.width, canvas.width);
   drawBricks();
   drawBall();
@@ -239,8 +259,15 @@ function draw() {
 }
 
 //press space bar to start game
+startScreen();
 document.body.onkeyup = function (e) {
   if (e.keyCode === 32) {
+    //hide start screen
+
+    startDisplay.classList.add("hidden");
+
+    //display canvas, lives and score
+    canvas.classList.remove("hidden");
     livesDisplay.classList.remove("hidden");
     startSound.play();
     draw();
