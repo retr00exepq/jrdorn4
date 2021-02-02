@@ -15,7 +15,7 @@ const livesDisplay = document.querySelector("#lives");
 
 const startDisplay = document.querySelector("#start");
 const winDisplay = document.querySelector("#win");
-const loseDisplay = document.querySelector("#win");
+const loseDisplay = document.querySelector("#lose");
 
 //sound effects
 const startSound = new Audio("audio/start.wav");
@@ -50,7 +50,7 @@ let brickColumnCount = 7;
 const brickWidth = 30;
 const brickHeight = 12;
 const brickPadding = 5;
-const brickOffsetLeft = 90;
+const brickOffsetLeft = 80;
 
 let score = 0;
 let lives = 3;
@@ -188,19 +188,16 @@ function drawLives() {
 
 //display start screen
 function startScreen() {
-  ctx.clearRect(0, 0, canvas.width, canvas.width);
   startDisplay.classList.remove("hidden");
 }
 
 //display win screen
 function winScreen() {
-  ctx.clearRect(0, 0, canvas.width, canvas.width);
   winDisplay.classList.remove("hidden");
 }
 
 // display lose sceen
 function loseScreen() {
-  ctx.clearRect(0, 0, canvas.width, canvas.width);
   loseDisplay.classList.remove("hidden");
 }
 

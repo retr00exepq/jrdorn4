@@ -48,7 +48,6 @@ body {
 canvas {
   margin-top: 2em;
   background: #1e1e1e;
-  border: 2px solid snow;
 }
 
 /* display score and lives */
@@ -94,6 +93,7 @@ canvas {
 }
 
 h1 {
+  margin-top: 2em;
   font-size: 6em;
   justify-self: center;
 }
@@ -110,7 +110,23 @@ h3 {
 
 /* win screen */
 
+#win {
+  display: grid;
+}
+
+#win > * {
+  justify-self: center;
+}
+
 /* lose screen */
+
+#lose {
+  display: grid;
+}
+
+#lose > * {
+  justify-self: center;
+}
 
 /* hide screens  */
 
