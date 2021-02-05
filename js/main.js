@@ -12,6 +12,7 @@ const brokenColor2 = "#7D5099"; //xxxx to display when brick hit twice
 const myScore = document.querySelector("#score");
 const myLives = document.querySelector("#hearts");
 const livesDisplay = document.querySelector("#lives");
+const slDisplay = document.querySelector("#scorelives");
 
 const startDisplay = document.querySelector("#start");
 const winDisplay = document.querySelector("#win");
@@ -35,8 +36,8 @@ const brickSound5 = new Audio("audio/brick5.wav");
 let x = canvas.width / 2;
 let y = canvas.height - 30;
 
-let dx = 2;
-let dy = -2;
+let dx = 3;
+let dy = -3;
 
 const paddleHeight = 10;
 const paddleWidth = 60;
@@ -44,16 +45,15 @@ let paddleX = (canvas.width - paddleWidth) / 2;
 
 let rightPressed = false;
 let leftPressed = false;
-let brickRowCount = 7;
-let brickColumnCount = 7;
+let brickRowCount = 1;
+let brickColumnCount = 1;
+// let brickRowCount = 7;
+// let brickColumnCount = 7;
 
 const brickWidth = 30;
 const brickHeight = 12;
 const brickPadding = 5;
 const brickOffsetLeft = 80;
-
-let score = 0;
-let lives = 3;
 
 const bricks = [];
 for (let c = 0; c < brickColumnCount; c++) {
@@ -71,6 +71,43 @@ for (let c = 0; c < brickColumnCount; c++) {
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
+// || Classes
+//functionality for starting game
+class Game {
+  constructor() {
+    this.state = 0;
+    this.score = 0;
+    this.lives = 3;
+  }
+  start() {
+    //only start game if no game is currently running
+    if (this.state === 0) {
+      //hide start/ win/ lose screens before starting game
+      if (!startDisplay.classList.contains("hidden")) {
+        startDisplay.classList.add("hidden");
+      } else if (!winDisplay.classList.contains("hidden")) {
+        winDisplay.classList.add("hidden");
+      } else if (!loseDisplay.classList.contains("hidden")) {
+        loseDisplay.classList.add("hidden");
+      }
+
+      //display canvas, lives and score
+      canvas.classList.remove("hidden");
+      slDisplay.classList.remove("hidden");
+      startSound.play();
+      draw();
+      this.state = 1; //game running
+    }
+  }
+  stop() {
+    //mark game as stopped and reset score/ lives
+    this.state = 0;
+    this.score = 0;
+    this.lives = 4;
+  }
+}
+let myGame = new Game();
+
 // || Functions
 
 //move paddle left or right on arrow key press
@@ -81,6 +118,7 @@ function keyDownHandler(e) {
   } else if (e.code === "ArrowLeft") {
     leftPressed = true;
   }
+  //handle spacebar, include closure for state?
 }
 
 //stop moving paddle when arrow key released
@@ -89,8 +127,12 @@ function keyUpHandler(e) {
     rightPressed = false;
   } else if (e.code === "ArrowLeft") {
     leftPressed = false;
+  } else if (e.code === "Space") {
+    myGame.start();
   }
 }
+
+//////////////////////////////////////////////////////
 
 //play a random sound on brick collision
 function randomBrick() {
@@ -116,13 +158,15 @@ function collisionDetection() {
           dy = -dy;
           b.status--;
           if (b.status === 0) {
-            score++;
+            myGame.score++;
           }
           //level won when all bricks are smashed
-          if (score === brickRowCount * brickColumnCount) {
+          if (myGame.score === brickRowCount * brickColumnCount) {
             winSound.play();
-            alert("You Win!");
-            document.location.reload();
+            displayScreen("winDisplay");
+            canvas.classList.add("hidden");
+            slDisplay.classList.add("hidden");
+            myGame.stop();
           }
         }
       }
@@ -174,31 +218,21 @@ function drawBricks() {
 
 //display score above canvas
 function drawScore() {
-  myScore.innerHTML = `SCORE: ${score}`;
+  myScore.innerHTML = `SCORE: ${myGame.score}`;
 }
 
 //display hearts to count lives
 function drawLives() {
   let str = "";
-  for (let i = 0; i < lives; i++) {
+  for (let i = 0; i < myGame.lives; i++) {
     str += '<img class="heart" src="img/heart.png" />';
   }
   myLives.innerHTML = str;
 }
 
-//display start screen
-function startScreen() {
-  startDisplay.classList.remove("hidden");
-}
-
-//display win screen
-function winScreen() {
-  winDisplay.classList.remove("hidden");
-}
-
-// display lose sceen
-function loseScreen() {
-  loseDisplay.classList.remove("hidden");
+//display a screen
+function displayScreen(name) {
+  return Function(`${name}.classList.remove("hidden");`)();
 }
 
 //master function
@@ -228,11 +262,15 @@ function draw() {
     } else {
       //ball hit ground
       dropSound.play();
-      lives--;
-      if (!lives) {
+      myGame.lives--;
+      if (!myGame.lives) {
+        //display lose screen, exit game and hide canvas/ score/ lives
         loseSound.play();
-        alert("Game Over");
-        document.location.reload();
+        displayScreen("loseDisplay");
+        canvas.classList.add("hidden");
+        slDisplay.classList.add("hidden");
+        myGame.stop();
+        return;
       } else {
         x = canvas.width / 2;
         y = canvas.height - 30;
@@ -255,18 +293,5 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
-//press space bar to start game
-startScreen();
-document.body.onkeyup = function (e) {
-  if (e.keyCode === 32) {
-    //hide start screen
-
-    startDisplay.classList.add("hidden");
-
-    //display canvas, lives and score
-    canvas.classList.remove("hidden");
-    livesDisplay.classList.remove("hidden");
-    startSound.play();
-    draw();
-  }
-};
+//display start screen on page load
+displayScreen("startDisplay");
