@@ -45,27 +45,6 @@ let paddleX = (canvas.width - paddleWidth) / 2;
 
 let rightPressed = false;
 let leftPressed = false;
-let brickRowCount = 1;
-let brickColumnCount = 1;
-// let brickRowCount = 7;
-// let brickColumnCount = 7;
-
-const brickWidth = 30;
-const brickHeight = 12;
-const brickPadding = 5;
-const brickOffsetLeft = 80;
-
-const bricks = [];
-for (let c = 0; c < brickColumnCount; c++) {
-  bricks[c] = [];
-  for (let r = 0; r < brickRowCount; r++) {
-    bricks[c][r] = {
-      x: 0,
-      y: 0,
-      status: 3,
-    };
-  }
-}
 
 // || Event listeners
 document.addEventListener("keydown", keyDownHandler, false);
@@ -78,6 +57,7 @@ class Game {
     this.state = 0;
     this.score = 0;
     this.lives = 3;
+    this.won = false;
   }
   start() {
     //only start game if no game is currently running
@@ -103,10 +83,72 @@ class Game {
     //mark game as stopped and reset score/ lives
     this.state = 0;
     this.score = 0;
-    this.lives = 4;
+    this.lives = 3;
   }
 }
 let myGame = new Game();
+
+//brick setup
+class Bricks {
+  constructor() {
+    this.brickRowCount = 2;
+    this.brickColumnCount = 2;
+    this.brickWidth = 30;
+    this.brickHeight = 12;
+    this.brickPadding = 5;
+    this.brickOffsetLeft = 80;
+    this.brickOffsetTop = 50;
+    this.bricks = [];
+  }
+  setUp() {
+    //set up brick rows and columns
+    for (let c = 0; c < this.brickColumnCount; c++) {
+      this.bricks[c] = [];
+      for (let r = 0; r < this.brickRowCount; r++) {
+        this.bricks[c][r] = {
+          x: 0,
+          y: 0,
+          health: 3,
+        };
+      }
+    }
+  }
+  updateStage(rows, cols) {
+    //change number of rows and columns
+    this.brickRowCount = rows;
+    this.brickColumnCount = cols;
+  }
+  drawBricks() {
+    //draw brick rows and colums on canvas
+    for (let c = 0; c < this.brickColumnCount; c++) {
+      for (let r = 0; r < this.brickRowCount; r++) {
+        if (this.bricks[c][r].health > 0) {
+          let brickX =
+            r * (this.brickWidth + this.brickPadding) + this.brickOffsetLeft;
+          let brickY =
+            c * (this.brickHeight + this.brickPadding) + this.brickOffsetTop;
+          this.bricks[c][r].x = brickX;
+          this.bricks[c][r].y = brickY;
+          ctx.beginPath();
+          ctx.rect(brickX, brickY, this.brickWidth, this.brickHeight);
+          if (this.bricks[c][r].health === 3) {
+            ctx.fillStyle = itemColor;
+          } else if (this.bricks[c][r].health === 2) {
+            ctx.fillStyle = brokenColor1;
+          } else {
+            ctx.fillStyle = brokenColor2;
+          }
+          ctx.fill();
+          ctx.closePath();
+        }
+      }
+    }
+  }
+}
+////////////////////////////////////////
+let myBricks = new Bricks();
+myBricks.setUp();
+////////////////////////////////////////
 
 // || Functions
 
@@ -143,30 +185,35 @@ function randomBrick() {
 
 //detect brick collision
 function collisionDetection() {
-  for (let c = 0; c < brickColumnCount; c++) {
-    for (let r = 0; r < brickRowCount; r++) {
-      let b = bricks[c][r];
-      if (b.status > 0) {
+  for (let c = 0; c < myBricks.brickColumnCount; c++) {
+    for (let r = 0; r < myBricks.brickRowCount; r++) {
+      let b = myBricks.bricks[c][r];
+      if (b.health > 0) {
         if (
           x > b.x &&
-          x < b.x + brickWidth &&
+          x < b.x + myBricks.brickWidth &&
           y > b.y &&
-          y < b.y + brickHeight
+          y < b.y + myBricks.brickHeight
         ) {
           //handle brick collision
           randomBrick();
           dy = -dy;
-          b.status--;
-          if (b.status === 0) {
+          b.health--;
+          if (b.health === 0) {
             myGame.score++;
           }
           //level won when all bricks are smashed
-          if (myGame.score === brickRowCount * brickColumnCount) {
+          if (
+            myGame.score ===
+            myBricks.brickRowCount * myBricks.brickColumnCount
+          ) {
             winSound.play();
+            myBricks.setUp();
             displayScreen("winDisplay");
             canvas.classList.add("hidden");
             slDisplay.classList.add("hidden");
             myGame.stop();
+            myGame.won = true;
           }
         }
       }
@@ -191,31 +238,6 @@ function drawPaddle() {
   ctx.closePath();
 }
 
-//draw brick rows and colums on canvas
-function drawBricks() {
-  for (let c = 0; c < brickColumnCount; c++) {
-    for (let r = 0; r < brickRowCount; r++) {
-      if (bricks[c][r].status > 0) {
-        let brickX = r * (brickWidth + brickPadding) + brickOffsetLeft;
-        let brickY = c * (brickHeight + brickPadding);
-        bricks[c][r].x = brickX;
-        bricks[c][r].y = brickY;
-        ctx.beginPath();
-        ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        if (bricks[c][r].status === 3) {
-          ctx.fillStyle = itemColor;
-        } else if (bricks[c][r].status === 2) {
-          ctx.fillStyle = brokenColor1;
-        } else {
-          ctx.fillStyle = brokenColor2;
-        }
-        ctx.fill();
-        ctx.closePath();
-      }
-    }
-  }
-}
-
 //display score above canvas
 function drawScore() {
   myScore.innerHTML = `SCORE: ${myGame.score}`;
@@ -238,7 +260,7 @@ function displayScreen(name) {
 //master function
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.width);
-  drawBricks();
+  myBricks.drawBricks();
   drawBall();
   drawPaddle();
   drawScore();
@@ -266,6 +288,7 @@ function draw() {
       if (!myGame.lives) {
         //display lose screen, exit game and hide canvas/ score/ lives
         loseSound.play();
+        myBricks.setUp();
         displayScreen("loseDisplay");
         canvas.classList.add("hidden");
         slDisplay.classList.add("hidden");
@@ -290,6 +313,13 @@ function draw() {
 
   x += dx;
   y += dy;
+
+  //exit when game won
+  if (myGame.won === true) {
+    myGame.won = false;
+    return;
+  }
+
   requestAnimationFrame(draw);
 }
 
