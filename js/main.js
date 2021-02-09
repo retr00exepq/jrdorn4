@@ -145,10 +145,8 @@ class Bricks {
     }
   }
 }
-////////////////////////////////////////
 let myBricks = new Bricks();
-myBricks.setUp();
-////////////////////////////////////////
+myBricks.setUp(); //initialize bricks on page load
 
 // || Functions
 
@@ -173,8 +171,6 @@ function keyUpHandler(e) {
     myGame.start();
   }
 }
-
-//////////////////////////////////////////////////////
 
 //play a random sound on brick collision
 function randomBrick() {
@@ -257,6 +253,12 @@ function displayScreen(name) {
   return Function(`${name}.classList.remove("hidden");`)();
 }
 
+//////////////////////////////////////////
+function muteUmute() {
+  let muteButton = document.createElement("button");
+}
+//////////////////////////////////////////
+
 //master function
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.width);
@@ -293,6 +295,7 @@ function draw() {
         canvas.classList.add("hidden");
         slDisplay.classList.add("hidden");
         myGame.stop();
+        myGame.lives = 4;
         return;
       } else {
         x = canvas.width / 2;
