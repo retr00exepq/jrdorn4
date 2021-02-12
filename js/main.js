@@ -326,5 +326,28 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
+//
+let myModule = {
+  myProperty: 200,
+
+  myConfig: {
+    useCaching: true,
+    language: "en",
+  },
+
+  myMethod: function () {
+    console.log("Object literal");
+  },
+
+  reportConfig: function () {
+    console.log(
+      `Caching is ${this.myConfig.useCaching ? "enabled" : "disabled"}`
+    );
+  },
+
+  updateConfig: 
+};
+//
+
 //display start screen on page load
 displayScreen("startDisplay");
