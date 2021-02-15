@@ -332,11 +332,11 @@ let myModule = {
 
   myConfig: {
     useCaching: true,
-    language: "en",
+    lang: "en",
   },
 
   myMethod: function () {
-    console.log("Object literal");
+    console.log(this);
   },
 
   reportConfig: function () {
@@ -345,8 +345,21 @@ let myModule = {
     );
   },
 
-  updateConfig: 
+  updateConfig: function (newConfig) {
+    if (typeof newConfig === "object") {
+      this.myConfig = newConfig;
+      console.log(`Updated to ${this.myConfig.lang}`);
+    }
+  },
 };
+
+myModule.myMethod();
+myModule.reportConfig();
+myModule.updateConfig({
+  useCaching: false,
+  lang: "fr",
+});
+myModule.reportConfig();
 //
 
 //display start screen on page load
