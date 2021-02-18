@@ -1,3 +1,5 @@
+"use strict";
+
 // || Variables
 const canvas = document.querySelector("canvas");
 canvas.width = 400;
@@ -326,7 +328,11 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
-//
+///////////////////////////////////////////////////
+
+///////////////////////////////////////////////////
+
+///////////////////////////////////////////////////
 let myModule = {
   myProperty: 200,
 
@@ -353,6 +359,19 @@ let myModule = {
   },
 };
 
+let myObjectLiteralApp = {
+  //function
+  getInfo: function () {
+    console.log("getInfo");
+  },
+  //populate with more object namespaces
+  models: {},
+  views: {
+    pages: {},
+  },
+  collections: {},
+};
+
 myModule.myMethod();
 myModule.reportConfig();
 myModule.updateConfig({
@@ -360,7 +379,15 @@ myModule.updateConfig({
   lang: "fr",
 });
 myModule.reportConfig();
-//
+(function () {
+  let message = "IIFE";
+  console.log(message);
+})();
+///////////////////////////////////////////////////
+
+///////////////////////////////////////////////////
+
+///////////////////////////////////////////////////
 
 //display start screen on page load
 displayScreen("startDisplay");
