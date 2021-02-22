@@ -1,4 +1,29 @@
-"use strict";
+//
+//
+//
+//start local server and load json via ajax call?
+// fetch("test.json")
+//   .then((response) => response.json())
+//   .then((data) => console.log(data));
+
+//nodeJS?
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
+
+//
+//
+//
+
+//check for namespace existence: if already defined, use that instance; else, assign to object literal to MyApp
+// if (!MyApp) {
+//   MyApp = {};
+// }
 
 // || Variables
 const canvas = document.querySelector("canvas");
@@ -359,6 +384,7 @@ let myModule = {
   },
 };
 
+//one can use also JSON for storing config data (simpler storage to send to backend), it is a subset of object literal notation
 let myObjectLiteralApp = {
   //function
   getInfo: function () {
@@ -370,6 +396,21 @@ let myObjectLiteralApp = {
     pages: {},
   },
   collections: {},
+
+  myConfig: {
+    language: "en-US",
+    defaults: {
+      enableSharing: false,
+      maxNum: 20,
+    },
+    theme: {
+      color: "red",
+      toolbars: {
+        index: "ui-nav-toolbar",
+        pages: "ui-custom-toolbar",
+      },
+    },
+  },
 };
 
 myModule.myMethod();
@@ -379,9 +420,11 @@ myModule.updateConfig({
   lang: "fr",
 });
 myModule.reportConfig();
+var global = "global";
 (function () {
   let message = "IIFE";
   console.log(message);
+  console.log(Window);
 })();
 ///////////////////////////////////////////////////
 
