@@ -1,3 +1,5 @@
+//rarely have code longer than 100 lines and instead break code into modules
+
 //
 //
 //
