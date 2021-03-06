@@ -1,27 +1,5 @@
 //rarely have code longer than 100 lines and instead break code into modules
 
-//
-//
-//
-//start local server and load json via ajax call?
-// fetch("test.json")
-//   .then((response) => response.json())
-//   .then((data) => console.log(data));
-
-//nodeJS?
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
-
-//
-//
-//
-
 //check for namespace existence: if already defined, use that instance; else, assign to object literal to MyApp
 // if (!MyApp) {
 //   MyApp = {};
