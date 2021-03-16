@@ -5,53 +5,53 @@
 //   MyApp = {};
 // }
 
-// || Variables
-const canvas = document.querySelector("canvas");
-canvas.width = 400;
-canvas.height = 250;
-const ctx = canvas.getContext("2d");
-const ballRadius = 15;
+// // || Variables
+// const canvas = document.querySelector("canvas");
+// canvas.width = 400;
+// canvas.height = 250;
+// const ctx = canvas.getContext("2d");
+// const ballRadius = 15;
 
-const itemColor = "#6c9950"; //green
-const brokenColor1 = "#509199"; //xxxx to display when brick hit twice
-const brokenColor2 = "#7D5099"; //xxxx to display when brick hit twice
+// const itemColor = "#6c9950"; //green
+// const brokenColor1 = "#509199"; //xxxx to display when brick hit twice
+// const brokenColor2 = "#7D5099"; //xxxx to display when brick hit twice
 
-const myScore = document.querySelector("#score");
-const myLives = document.querySelector("#hearts");
-const livesDisplay = document.querySelector("#lives");
-const slDisplay = document.querySelector("#scorelives");
+// const myScore = document.querySelector("#score");
+// const myLives = document.querySelector("#hearts");
+// const livesDisplay = document.querySelector("#lives");
+// const slDisplay = document.querySelector("#scorelives");
 
-const startDisplay = document.querySelector("#start");
-const winDisplay = document.querySelector("#win");
-const loseDisplay = document.querySelector("#lose");
+// const startDisplay = document.querySelector("#start");
+// const winDisplay = document.querySelector("#win");
+// const loseDisplay = document.querySelector("#lose");
 
-//sound effects
-const startSound = new Audio("audio/start.wav");
-const winSound = new Audio("audio/win.wav");
-const loseSound = new Audio("audio/lose.wav");
-const dropSound = new Audio("audio/drop.wav");
-const wallSound = new Audio("audio/wall.wav");
-const paddleSound = new Audio("audio/paddle.wav");
+// //sound effects
+// const startSound = new Audio("audio/start.wav");
+// const winSound = new Audio("audio/win.wav");
+// const loseSound = new Audio("audio/lose.wav");
+// const dropSound = new Audio("audio/drop.wav");
+// const wallSound = new Audio("audio/wall.wav");
+// const paddleSound = new Audio("audio/paddle.wav");
 
-const brickSound1 = new Audio("audio/brick1.wav");
-const brickSound2 = new Audio("audio/brick2.wav");
-const brickSound3 = new Audio("audio/brick3.wav");
-const brickSound4 = new Audio("audio/brick4.wav");
-const brickSound5 = new Audio("audio/brick5.wav");
+// const brickSound1 = new Audio("audio/brick1.wav");
+// const brickSound2 = new Audio("audio/brick2.wav");
+// const brickSound3 = new Audio("audio/brick3.wav");
+// const brickSound4 = new Audio("audio/brick4.wav");
+// const brickSound5 = new Audio("audio/brick5.wav");
 
-//x and y coordinates of ball
-let x = canvas.width / 2;
-let y = canvas.height - 30;
+// //x and y coordinates of ball
+// let x = canvas.width / 2;
+// let y = canvas.height - 30;
 
-let dx = 3;
-let dy = -3;
+// let dx = 3;
+// let dy = -3;
 
-const paddleHeight = 10;
-const paddleWidth = 60;
-let paddleX = (canvas.width - paddleWidth) / 2;
+// const paddleHeight = 10;
+// const paddleWidth = 60;
+// let paddleX = (canvas.width - paddleWidth) / 2;
 
-let rightPressed = false;
-let leftPressed = false;
+// let rightPressed = false;
+// let leftPressed = false;
 
 // || Event listeners
 document.addEventListener("keydown", keyDownHandler, false);
@@ -95,65 +95,65 @@ class Game {
 }
 let myGame = new Game();
 
-//brick setup
-class Bricks {
-  constructor() {
-    this.brickRowCount = 2;
-    this.brickColumnCount = 2;
-    this.brickWidth = 30;
-    this.brickHeight = 12;
-    this.brickPadding = 5;
-    this.brickOffsetLeft = 80;
-    this.brickOffsetTop = 50;
-    this.bricks = [];
-  }
-  setUp() {
-    //set up brick rows and columns
-    for (let c = 0; c < this.brickColumnCount; c++) {
-      this.bricks[c] = [];
-      for (let r = 0; r < this.brickRowCount; r++) {
-        this.bricks[c][r] = {
-          x: 0,
-          y: 0,
-          health: 3,
-        };
-      }
-    }
-  }
-  updateStage(rows, cols) {
-    //change number of rows and columns
-    this.brickRowCount = rows;
-    this.brickColumnCount = cols;
-  }
-  drawBricks() {
-    //draw brick rows and colums on canvas
-    for (let c = 0; c < this.brickColumnCount; c++) {
-      for (let r = 0; r < this.brickRowCount; r++) {
-        if (this.bricks[c][r].health > 0) {
-          let brickX =
-            r * (this.brickWidth + this.brickPadding) + this.brickOffsetLeft;
-          let brickY =
-            c * (this.brickHeight + this.brickPadding) + this.brickOffsetTop;
-          this.bricks[c][r].x = brickX;
-          this.bricks[c][r].y = brickY;
-          ctx.beginPath();
-          ctx.rect(brickX, brickY, this.brickWidth, this.brickHeight);
-          if (this.bricks[c][r].health === 3) {
-            ctx.fillStyle = itemColor;
-          } else if (this.bricks[c][r].health === 2) {
-            ctx.fillStyle = brokenColor1;
-          } else {
-            ctx.fillStyle = brokenColor2;
-          }
-          ctx.fill();
-          ctx.closePath();
-        }
-      }
-    }
-  }
-}
-let myBricks = new Bricks();
-myBricks.setUp(); //initialize bricks on page load
+// //brick setup
+// class Bricks {
+//   constructor() {
+//     this.brickRowCount = 2;
+//     this.brickColumnCount = 2;
+//     this.brickWidth = 30;
+//     this.brickHeight = 12;
+//     this.brickPadding = 5;
+//     this.brickOffsetLeft = 80;
+//     this.brickOffsetTop = 50;
+//     this.bricks = [];
+//   }
+//   setUp() {
+//     //set up brick rows and columns
+//     for (let c = 0; c < this.brickColumnCount; c++) {
+//       this.bricks[c] = [];
+//       for (let r = 0; r < this.brickRowCount; r++) {
+//         this.bricks[c][r] = {
+//           x: 0,
+//           y: 0,
+//           health: 3,
+//         };
+//       }
+//     }
+//   }
+//   updateStage(rows, cols) {
+//     //change number of rows and columns
+//     this.brickRowCount = rows;
+//     this.brickColumnCount = cols;
+//   }
+//   drawBricks() {
+//     //draw brick rows and colums on canvas
+//     for (let c = 0; c < this.brickColumnCount; c++) {
+//       for (let r = 0; r < this.brickRowCount; r++) {
+//         if (this.bricks[c][r].health > 0) {
+//           let brickX =
+//             r * (this.brickWidth + this.brickPadding) + this.brickOffsetLeft;
+//           let brickY =
+//             c * (this.brickHeight + this.brickPadding) + this.brickOffsetTop;
+//           this.bricks[c][r].x = brickX;
+//           this.bricks[c][r].y = brickY;
+//           ctx.beginPath();
+//           ctx.rect(brickX, brickY, this.brickWidth, this.brickHeight);
+//           if (this.bricks[c][r].health === 3) {
+//             ctx.fillStyle = itemColor;
+//           } else if (this.bricks[c][r].health === 2) {
+//             ctx.fillStyle = brokenColor1;
+//           } else {
+//             ctx.fillStyle = brokenColor2;
+//           }
+//           ctx.fill();
+//           ctx.closePath();
+//         }
+//       }
+//     }
+//   }
+// }
+// let myBricks = new Bricks();
+// myBricks.setUp(); //initialize bricks on page load
 
 // || Functions
 

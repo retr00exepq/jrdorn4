@@ -71,9 +71,9 @@ function onError(error) {
 //custom errors
 app.use(function (req, res, next) {
   if (req) {
-    console.log(res);
-    return next(createError(404, "Page not found"));
-    return next(createError(500, "Internal server error"));
+    // console.log(res);
+    // return next(createError(404, "Page not found"));
+    // return next(createError(500, "Internal server error"));
     next();
   }
 });
