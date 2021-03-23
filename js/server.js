@@ -79,5 +79,5 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  res.send("F");
+  res.render(index.html);
 });
