@@ -10,7 +10,6 @@ export class Settings {
 
 import { Settings } from "config.js";
 
-variables;
 const canvas = document.querySelector("canvas");
 canvas.width = 400;
 canvas.height = 250;
