@@ -54,35 +54,12 @@ function randomBrick() {
 //detect brick collision
 
 //draw ball on canvas
-let img = new Image();
-img.src = "img/ball.png";
-
-function drawBall() {
-  ctx.drawImage(img, x, y);
-}
 
 //draw paddle on canvas
-function drawPaddle() {
-  ctx.beginPath();
-  ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = itemColor;
-  ctx.fill();
-  ctx.closePath();
-}
 
 //display score above canvas
-function drawScore() {
-  myScore.innerHTML = `SCORE: ${myGame.score}`;
-}
 
 //display hearts to count lives
-function drawLives() {
-  let str = "";
-  for (let i = 0; i < myGame.lives; i++) {
-    str += '<img class="heart" src="img/heart.png" />';
-  }
-  myLives.innerHTML = str;
-}
 
 //display a screen
 function displayScreen(name) {
