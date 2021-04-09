@@ -1,4 +1,4 @@
-import "./modules/collision";
+import { collisionDetection } from "./modules/collision";
 import "./modules/draw";
 import "./modules/myMod";
 import "./modules/config";

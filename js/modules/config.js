@@ -1,4 +1,4 @@
-// You can export any top-level function, class, var, let, or const
+// export any top-level function (class, var, let, const)
 
 export class Settings {
   constructor() {
@@ -7,8 +7,6 @@ export class Settings {
   }
 }
 // const Set = new Settings();
-
-import { Settings } from "config.js";
 
 const canvas = document.querySelector("canvas");
 canvas.width = 400;
