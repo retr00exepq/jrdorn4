@@ -1,4 +1,4 @@
-class Game {
+export class Game {
   constructor() {
     this.state = 0;
     this.score = 0;

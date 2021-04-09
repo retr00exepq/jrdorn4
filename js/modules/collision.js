@@ -1,4 +1,4 @@
-function collisionDetection() {
+export function collisionDetection() {
   for (let c = 0; c < myBricks.brickColumnCount; c++) {
     for (let r = 0; r < myBricks.brickRowCount; r++) {
       let b = myBricks.bricks[c][r];

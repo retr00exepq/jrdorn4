@@ -1,5 +1,5 @@
 //brick setup
-class Bricks {
+export class Bricks {
   constructor() {
     this.brickRowCount = 2;
     this.brickColumnCount = 2;

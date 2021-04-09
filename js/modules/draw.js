@@ -32,7 +32,7 @@ function drawLives() {
 ///
 
 //master function
-function draw() {
+export function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.width);
   myBricks.drawBricks();
   drawBall();

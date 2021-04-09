@@ -1,3 +1,10 @@
+import "./modules/collision";
+import "./modules/draw";
+import "./modules/myMod";
+import "./modules/config";
+import "./modules/game";
+import "./modules/bricks";
+
 //< 100 lines per module
 
 //check for namespace existence: if already defined, use that instance; else, assign to object literal to MyApp
