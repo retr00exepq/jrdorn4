@@ -32,4 +32,3 @@ export class Game {
     this.lives = 3;
   }
 }
-// let myGame = new Game();

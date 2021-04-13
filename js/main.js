@@ -1,9 +1,14 @@
 import { collisionDetection } from "./modules/collision";
-import "./modules/draw";
-import "./modules/myMod";
+import {
+  drawBall,
+  drawPaddle,
+  drawScore,
+  drawLives,
+  draw,
+} from "./modules/draw";
 import "./modules/config";
-import "./modules/game";
-import "./modules/bricks";
+import { Game } from "./modules/game";
+import { Bricks } from "./modules/bricks";
 
 //< 100 lines per module
 
@@ -21,11 +26,11 @@ document.addEventListener("keyup", keyUpHandler, false);
 // || Classes
 //functionality for starting game
 
-// let myGame = new Game();
+let myGame = new Game();
 
 // //brick setup
-// let myBricks = new Bricks();
-// myBricks.setUp(); //initialize bricks on page load
+let myBricks = new Bricks();
+myBricks.setUp(); //initialize bricks on page load
 
 // || Functions
 

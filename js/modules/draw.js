@@ -1,13 +1,13 @@
 //draw ball on canvas
-let img = new Image();
-img.src = "img/ball.png";
+// let img = new Image();
+// img.src = "img/ball.png";
 
-function drawBall() {
+export function drawBall() {
   ctx.drawImage(img, x, y);
 }
 
 //draw paddle on canvas
-function drawPaddle() {
+export function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
   ctx.fillStyle = itemColor;
@@ -16,12 +16,12 @@ function drawPaddle() {
 }
 
 //display score above canvas
-function drawScore() {
+export function drawScore() {
   myScore.innerHTML = `SCORE: ${myGame.score}`;
 }
 
 //display hearts to count lives
-function drawLives() {
+export function drawLives() {
   let str = "";
   for (let i = 0; i < myGame.lives; i++) {
     str += '<img class="heart" src="img/heart.png" />';

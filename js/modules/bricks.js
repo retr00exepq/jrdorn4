@@ -55,5 +55,3 @@ export class Bricks {
     }
   }
 }
-// let myBricks = new Bricks();
-// myBricks.setUp(); //initialize bricks on page load
