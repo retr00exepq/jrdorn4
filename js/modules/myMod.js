@@ -24,7 +24,6 @@ let myModule = {
   },
 };
 
-//one can use also JSON for storing config data (simpler storage to send to backend), it is a subset of object literal notation
 let myObjectLiteralApp = {
   //function
   getInfo: function () {
