@@ -78,6 +78,8 @@ app.use(function (req, res, next) {
   }
 });
 
-app.get("/", (req, res) => {
-  res.render("index.html");
-});
+// app.get("/", (req, res) => {
+//   res.render("index.html");
+// });
+
+app.use(express.static("public"));
