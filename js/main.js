@@ -6,11 +6,9 @@ import {
   drawLives,
   draw,
 } from "./modules/draw";
-import "./modules/config";
+import { myConfig } from "./modules/config";
 import { Game } from "./modules/game";
 import { Bricks } from "./modules/bricks";
-
-//< 100 lines per module
 
 //check for namespace existence: if already defined, use that instance; else, assign to object literal to MyApp
 // if (!MyApp) {

@@ -1,14 +1,4 @@
-// export any top-level function (class, var, let, const)
-
-export class Settings {
-  constructor() {
-    this.first = 1;
-    this.second = 2;
-  }
-}
-// const Set = new Settings();
-
-export let myConfig = {
+export var myConfig = {
      canvas = document.querySelector("canvas"),
     canvas.width = 400,
     canvas.height = 250,
@@ -103,3 +93,72 @@ export let myConfig = {
 
 // let rightPressed = false;
 // let leftPressed = false;
+
+
+
+///////////////////////////////////////////////////
+
+let myModule = {
+  myProperty: 200,
+
+  myConfig: {
+    useCaching: true,
+    lang: "en",
+  },
+
+  myMethod: function () {
+    console.log(this);
+  },
+
+  reportConfig: function () {
+    console.log(
+      `Caching is ${this.myConfig.useCaching ? "enabled" : "disabled"}`
+    );
+  },
+
+  updateConfig: function (newConfig) {
+    if (typeof newConfig === "object") {
+      this.myConfig = newConfig;
+      console.log(`Updated to ${this.myConfig.lang}`);
+    }
+  },
+};
+
+let myObjectLiteralApp = {
+  //function
+  getInfo: function () {
+    console.log("getInfo");
+  },
+  //populate with more object namespaces
+  models: {},
+  views: {
+    pages: {},
+  },
+  collections: {},
+
+  myConfig: {
+    language: "en-US",
+    defaults: {
+      enableSharing: false,
+      maxNum: 20,
+    },
+    theme: {
+      color: "red",
+      toolbars: {
+        index: "ui-nav-toolbar",
+        pages: "ui-custom-toolbar",
+      },
+    },
+  },
+};
+
+///
+
+myModule.myMethod();
+myModule.reportConfig();
+myModule.updateConfig({
+  useCaching: false,
+  lang: "fr",
+});
+myModule.reportConfig();
+var global = "global";
