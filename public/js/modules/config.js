@@ -1,7 +1,12 @@
-export var myConfig = {
-     canvas = document.querySelector("canvas"),
-    canvas.width = 400,
-    canvas.height = 250,
+export var Config = {
+  
+  canvas = document.querySelector("canvas"),
+
+  canvasProps: {
+    width: 400,
+    height: 250,
+  },
+
    ctx = canvas.getContext("2d"),
    ballRadius = 15,
    itemColor = "#6c9950", //green
@@ -123,42 +128,3 @@ let myModule = {
     }
   },
 };
-
-let myObjectLiteralApp = {
-  //function
-  getInfo: function () {
-    console.log("getInfo");
-  },
-  //populate with more object namespaces
-  models: {},
-  views: {
-    pages: {},
-  },
-  collections: {},
-
-  myConfig: {
-    language: "en-US",
-    defaults: {
-      enableSharing: false,
-      maxNum: 20,
-    },
-    theme: {
-      color: "red",
-      toolbars: {
-        index: "ui-nav-toolbar",
-        pages: "ui-custom-toolbar",
-      },
-    },
-  },
-};
-
-///
-
-myModule.myMethod();
-myModule.reportConfig();
-myModule.updateConfig({
-  useCaching: false,
-  lang: "fr",
-});
-myModule.reportConfig();
-var global = "global";

@@ -6,7 +6,7 @@ import {
   drawLives,
   draw,
 } from "./modules/draw";
-import { myConfig } from "./modules/config";
+import { Config } from "./modules/config";
 import { Game } from "./modules/game";
 import { Bricks } from "./modules/bricks";
 
