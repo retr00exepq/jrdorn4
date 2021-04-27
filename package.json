@@ -4,7 +4,7 @@
   "description": "Break It is a JavaScipt block breaker game. Users move a paddle back and forth across the screen to hit a ball to break bricks while avoiding letting the ball drop.",
   "main": "js/server.js",
   "scripts": {
-    "start": "nodemon ./js/server.js",
+    "start": "nodemon ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
