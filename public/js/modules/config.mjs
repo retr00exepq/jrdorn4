@@ -103,28 +103,28 @@ export var Config = {
 
 ///////////////////////////////////////////////////
 
-let myModule = {
-  myProperty: 200,
+// let myModule = {
+//   myProperty: 200,
 
-  myConfig: {
-    useCaching: true,
-    lang: "en",
-  },
+//   myConfig: {
+//     useCaching: true,
+//     lang: "en",
+//   },
 
-  myMethod: function () {
-    console.log(this);
-  },
+//   myMethod: function () {
+//     console.log(this);
+//   },
 
-  reportConfig: function () {
-    console.log(
-      `Caching is ${this.myConfig.useCaching ? "enabled" : "disabled"}`
-    );
-  },
+//   reportConfig: function () {
+//     console.log(
+//       `Caching is ${this.myConfig.useCaching ? "enabled" : "disabled"}`
+//     );
+//   },
 
-  updateConfig: function (newConfig) {
-    if (typeof newConfig === "object") {
-      this.myConfig = newConfig;
-      console.log(`Updated to ${this.myConfig.lang}`);
-    }
-  },
-};
+//   updateConfig: function (newConfig) {
+//     if (typeof newConfig === "object") {
+//       this.myConfig = newConfig;
+//       console.log(`Updated to ${this.myConfig.lang}`);
+//     }
+//   },
+// };

@@ -1,14 +1,14 @@
-import { collisionDetection } from "./modules/collision";
+import { collisionDetection } from "./modules/collision.mjs";
 import {
   drawBall,
   drawPaddle,
   drawScore,
   drawLives,
   draw,
-} from "./modules/draw";
-import { Config } from "./modules/config";
-import { Game } from "./modules/game";
-import { Bricks } from "./modules/bricks";
+} from "./modules/draw.mjs";
+import { Config } from "./modules/config.mjs";
+import { Game } from "./modules/game.mjs";
+import { Bricks } from "./modules/bricks.mjs";
 
 //check for namespace existence: if already defined, use that instance; else, assign to object literal to MyApp
 // if (!MyApp) {
