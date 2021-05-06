@@ -27,7 +27,9 @@ import { Game } from "./modules/game.mjs";
   const livesDisplay = document.querySelector("#lives");
   const slDisplay = document.querySelector("#scorelives");
 
-  const startDisplay = document.querySelector("#start");
+  // const startDisplay = document.querySelector("#start");
+  window.startDisplay = startDisplay;
+  window.canvas = canvas;
   const winDisplay = document.querySelector("#win");
   const loseDisplay = document.querySelector("#lose");
 
