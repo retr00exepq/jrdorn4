@@ -1,4 +1,5 @@
 import { collisionDetection } from "./modules/collision.mjs";
+import { Bricks } from "./modules/bricks.mjs";
 import {
   drawBall,
   drawPaddle,
@@ -7,7 +8,6 @@ import {
   draw,
 } from "./modules/draw.mjs";
 import { Game } from "./modules/game.mjs";
-import { Bricks } from "./modules/bricks.mjs";
 
 (function () {
   // || Variables
@@ -59,20 +59,11 @@ import { Bricks } from "./modules/bricks.mjs";
   let rightPressed = false;
   let leftPressed = false;
 
-  // || Event listeners
+  // || Event Listeners
   document.addEventListener("keydown", keyDownHandler, false);
   document.addEventListener("keyup", keyUpHandler, false);
 
-  // || Classes
-  //functionality for starting game
-
-  let myGame = new Game();
-
-  //brick setup
-  let myBricks = new Bricks();
-  myBricks.setUp(); //initialize bricks on page load
-
-  // || Functions
+  // || Event Handlers
 
   //move paddle left or right on arrow key press
   function keyDownHandler(e) {
@@ -103,41 +94,36 @@ import { Bricks } from "./modules/bricks.mjs";
     return Function(`brickSound${random}.play();`)();
   }
 
-  //detect brick collision
-
+  //
   //draw ball on canvas
-
   //draw paddle on canvas
-
   //display score above canvas
-
   //display hearts to count lives
+  //
 
   //display a screen
   function displayScreen(name) {
-    return Function(`${name}.classList.remove("hidden");`)();
+    return name.classList.remove("hidden");
+    //   return Function(`${name}.classList.remove("hidden");`)();
   }
 
   //////////////////////////////////////////
-  function muteUmute() {
-    let muteButton = document.createElement("button");
-  }
+  // function muteUmute() {
+  //   let muteButton = document.createElement("button");
+  // }
   //////////////////////////////////////////
+
+  // || Consolidate Modules
+
+  //brick setup
+  let myBricks = new Bricks();
+  myBricks.setUp(); //initialize bricks on page load
+
+  //functionality for starting game
+  let myGame = new Game();
 
   ///draw
 
-  //check for namespace existence:
-  //  if already defined, use that instance;
-  //  else, assign to object literal to MyApp
-
-  // if (!BreakIt) {
-  //   BreakIt = {};
-  // }
-
-  let message = "IIFE";
-  console.log(message);
-  console.log(Window);
-
   //display start screen on page load
-  displayScreen("startDisplay");
+  displayScreen(startDisplay);
 })();
