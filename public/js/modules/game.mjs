@@ -6,6 +6,7 @@ export class Game {
     this.won = false;
   }
   start() {
+    console.log(this);
     //only start game if no game is currently running
     if (this.state === 0) {
       //hide start/ win/ lose screens before starting game

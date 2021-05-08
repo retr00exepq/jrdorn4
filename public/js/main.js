@@ -10,6 +10,27 @@ import {
 import { Game } from "./modules/game.mjs";
 
 (function () {
+  //////////////////////////////////////////
+
+  class Tangerine {
+    constructor(context) {
+      const one = 1;
+      const two = 2;
+      console.log(context.three);
+    }
+  }
+
+  class Funk {
+    constructor() {
+      var three = 3;
+      let basket = new Tangerine(this);
+      console.log(this);
+    }
+  }
+  let rFunk = new Funk();
+
+  //////////////////////////////////////////
+
   // || Variables
 
   const canvas = document.querySelector("canvas");
@@ -24,12 +45,17 @@ import { Game } from "./modules/game.mjs";
 
   const myScore = document.querySelector("#score");
   const myLives = document.querySelector("#hearts");
+  const startDisplay = document.querySelector("#start");
   const livesDisplay = document.querySelector("#lives");
   const slDisplay = document.querySelector("#scorelives");
 
-  // const startDisplay = document.querySelector("#start");
-  window.startDisplay = startDisplay;
-  window.canvas = canvas;
+  //////////////////////////////////////////
+  //////////////////////////////////////////
+  // window.startDisplay = startDisplay;
+  // window.canvas = canvas;
+  //////////////////////////////////////////
+  //////////////////////////////////////////
+
   const winDisplay = document.querySelector("#win");
   const loseDisplay = document.querySelector("#lose");
 
