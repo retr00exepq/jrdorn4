@@ -1,5 +1,5 @@
 export class Game {
-  constructor() {
+  constructor(context) {
     this.state = 0;
     this.score = 0;
     this.lives = 3;

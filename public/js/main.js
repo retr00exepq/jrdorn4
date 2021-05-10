@@ -14,20 +14,26 @@ import { Game } from "./modules/game.mjs";
 
   class Tangerine {
     constructor(context) {
-      const one = 1;
-      const two = 2;
+      this.one = 1;
+      this.two = 2;
       console.log(context.three);
     }
   }
 
   class Funk {
     constructor() {
-      var three = 3;
-      let basket = new Tangerine(this);
+      this.three = 3;
+      this.basket = new Tangerine(this);
       console.log(this);
     }
   }
   let rFunk = new Funk();
+
+  let user = {
+    firstName: "John",
+    lastName: "Smith",
+  };
+  console.log(user.firstName, user.lastName);
 
   //////////////////////////////////////////
 
@@ -148,7 +154,7 @@ import { Game } from "./modules/game.mjs";
   myBricks.setUp(); //initialize bricks on page load
 
   //functionality for starting game
-  let myGame = new Game();
+  let myGame = new Game(this);
 
   ///draw
 
