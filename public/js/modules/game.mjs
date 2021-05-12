@@ -1,12 +1,13 @@
 export class Game {
   constructor(context) {
+    this.main = context;
     this.state = 0;
     this.score = 0;
     this.lives = 3;
     this.won = false;
   }
   start() {
-    console.log(this);
+    console.log(this, "hi");
     //only start game if no game is currently running
     if (this.state === 0) {
       //hide start/ win/ lose screens before starting game
