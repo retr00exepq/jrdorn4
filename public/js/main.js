@@ -101,12 +101,6 @@ import { Game } from "./modules/game.mjs";
   //display hearts to count lives
   //
 
-  //display a screen
-  function displayScreen(name) {
-    return name.classList.remove("hidden");
-    //   return Function(`${name}.classList.remove("hidden");`)();
-  }
-
   //////////////////////////////////////////
   // function muteUmute() {
   //   let muteButton = document.createElement("button");
@@ -120,7 +114,8 @@ import { Game } from "./modules/game.mjs";
   myBricks.setUp(); //initialize bricks on page load
 
   //functionality for starting game
-  let myGame = new Game(this);
+
+  let myGame = new Game(startDisplay, canvas);
 
   ///draw
 
