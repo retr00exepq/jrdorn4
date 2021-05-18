@@ -1,6 +1,8 @@
 export class Game {
-  constructor(canvas) {
+  constructor() {
     this.startDisplay = document.querySelector("#start");
+    this.winDisplay = document.querySelector("#win");
+    this.loseDisplay = document.querySelector("#lose");
     this.canvas = canvas;
     this.state = 0;
     this.score = 0;

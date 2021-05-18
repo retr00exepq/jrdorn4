@@ -24,12 +24,8 @@ import { Game } from "./modules/game.mjs";
 
   const myScore = document.querySelector("#score");
   const myLives = document.querySelector("#hearts");
-  const startDisplay = document.querySelector("#start");
   const livesDisplay = document.querySelector("#lives");
   const slDisplay = document.querySelector("#scorelives");
-
-  const winDisplay = document.querySelector("#win");
-  const loseDisplay = document.querySelector("#lose");
 
   //sound effects
   const startSound = new Audio("audio/start.wav");
@@ -115,10 +111,10 @@ import { Game } from "./modules/game.mjs";
 
   //functionality for starting game
 
-  let myGame = new Game(startDisplay, canvas);
+  let myGame = new Game();
 
   ///draw
 
   //display start screen on page load
-  displayScreen(startDisplay);
+  myGame.displayScreen(this.startDisplay);
 })();
