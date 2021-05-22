@@ -1,8 +1,9 @@
 export class Game {
-  constructor() {
+  constructor(canvas) {
     this.startDisplay = document.querySelector("#start");
     this.winDisplay = document.querySelector("#win");
     this.loseDisplay = document.querySelector("#lose");
+    this.slDisplay = document.querySelector("#scorelives");
     this.canvas = canvas;
     this.state = 0;
     this.score = 0;
@@ -19,17 +20,17 @@ export class Game {
       //hide start/ win/ lose screens before starting game
       if (!this.startDisplay.classList.contains("hidden")) {
         this.startDisplay.classList.add("hidden");
-      } else if (!winDisplay.classList.contains("hidden")) {
-        winDisplay.classList.add("hidden");
-      } else if (!loseDisplay.classList.contains("hidden")) {
-        loseDisplay.classList.add("hidden");
+      } else if (!this.winDisplay.classList.contains("hidden")) {
+        this.winDisplay.classList.add("hidden");
+      } else if (!this.loseDisplay.classList.contains("hidden")) {
+        this.loseDisplay.classList.add("hidden");
       }
 
       //display canvas, lives and score
       this.canvas.classList.remove("hidden");
-      slDisplay.classList.remove("hidden");
-      startSound.play();
-      draw();
+      this.slDisplay.classList.remove("hidden");
+      // startSound.play();
+      // draw();
       this.state = 1; //game running
     }
   }

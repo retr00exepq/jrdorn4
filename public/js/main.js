@@ -16,7 +16,7 @@ import { Game } from "./modules/game.mjs";
   canvas.width = 400;
   canvas.height = 250;
   const ctx = canvas.getContext("2d");
-  const ballRadius = 15;
+  // const ballRadius = 15;
 
   const itemColor = "#6c9950"; //green
   const brokenColor1 = "#509199"; //xxxx to display when brick hit twice
@@ -25,15 +25,6 @@ import { Game } from "./modules/game.mjs";
   const myScore = document.querySelector("#score");
   const myLives = document.querySelector("#hearts");
   const livesDisplay = document.querySelector("#lives");
-  const slDisplay = document.querySelector("#scorelives");
-
-  //sound effects
-  const startSound = new Audio("audio/start.wav");
-  const winSound = new Audio("audio/win.wav");
-  const loseSound = new Audio("audio/lose.wav");
-  const dropSound = new Audio("audio/drop.wav");
-  const wallSound = new Audio("audio/wall.wav");
-  const paddleSound = new Audio("audio/paddle.wav");
 
   const brickSound1 = new Audio("audio/brick1.wav");
   const brickSound2 = new Audio("audio/brick2.wav");
@@ -90,13 +81,6 @@ import { Game } from "./modules/game.mjs";
     return Function(`brickSound${random}.play();`)();
   }
 
-  //
-  //draw ball on canvas
-  //draw paddle on canvas
-  //display score above canvas
-  //display hearts to count lives
-  //
-
   //////////////////////////////////////////
   // function muteUmute() {
   //   let muteButton = document.createElement("button");
@@ -111,10 +95,19 @@ import { Game } from "./modules/game.mjs";
 
   //functionality for starting game
 
-  let myGame = new Game();
-
-  ///draw
+  let myGame = new Game(canvas);
 
   //display start screen on page load
-  myGame.displayScreen(this.startDisplay);
+  myGame.displayScreen(myGame.startDisplay);
+
+  draw(myBricks, myGame, canvas, ctx);
+
+  myBricks.drawBricks();
+
+  //
+  //draw ball on canvas
+  //draw paddle on canvas
+  //display score above canvas
+  //display hearts to count lives
+  //
 })();
