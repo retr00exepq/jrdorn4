@@ -1,3 +1,4 @@
+//Detect when ball hits a brick
 export function collisionDetection() {
   for (let c = 0; c < myBricks.brickColumnCount; c++) {
     for (let r = 0; r < myBricks.brickRowCount; r++) {

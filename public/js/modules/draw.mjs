@@ -1,38 +1,42 @@
-//draw ball on canvas
-// let img = new Image();
-// img.src = "img/ball.png";
+//Draw game components (paddle, ball, lives, score)
+export function draw(myBricks, myGame, canvas, ctx, x, y, itemColor) {
+  //local variables
+  const paddleHeight = 10;
+  const paddleWidth = 60;
+  let paddleX = (canvas.width - paddleWidth) / 2;
+  const myScore = document.querySelector("#score");
+  const myLives = document.querySelector("#hearts");
 
-export function drawBall() {
-  ctx.drawImage(img, x, y);
-}
-
-//draw paddle on canvas
-export function drawPaddle() {
-  ctx.beginPath();
-  ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = itemColor;
-  ctx.fill();
-  ctx.closePath();
-}
-
-//display score above canvas
-export function drawScore() {
-  myScore.innerHTML = `SCORE: ${myGame.score}`;
-}
-
-//display hearts to count lives
-export function drawLives() {
-  let str = "";
-  for (let i = 0; i < myGame.lives; i++) {
-    str += '<img class="heart" src="img/heart.png" />';
+  //draw ball on canvas
+  function drawBall() {
+    let img = new Image();
+    img.src = "img/ball.png";
+    ctx.drawImage(img, x, y);
   }
-  myLives.innerHTML = str;
-}
 
-///
+  //draw paddle on canvas
+  function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = itemColor;
+    ctx.fill();
+    ctx.closePath();
+  }
 
-//master function
-export function draw(myBricks, myGame, canvas, ctx) {
+  //display score above canvas
+  function drawScore() {
+    myScore.innerHTML = `SCORE: ${myGame.score}`;
+  }
+
+  //display hearts to count lives
+  function drawLives() {
+    let str = "";
+    for (let i = 0; i < myGame.lives; i++) {
+      str += '<img class="heart" src="img/heart.png" />';
+    }
+    myLives.innerHTML = str;
+  }
+
   //
   //sound effects
   const startSound = new Audio("audio/start.wav");

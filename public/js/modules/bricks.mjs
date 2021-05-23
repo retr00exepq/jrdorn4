@@ -1,4 +1,4 @@
-//brick setup
+//Draw bricks on canvas
 export class Bricks {
   constructor() {
     this.brickRowCount = 2;

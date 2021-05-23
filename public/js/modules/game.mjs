@@ -1,3 +1,4 @@
+//Start, stop, and display game screens
 export class Game {
   constructor(canvas) {
     this.startDisplay = document.querySelector("#start");

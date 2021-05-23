@@ -1,12 +1,6 @@
 import { collisionDetection } from "./modules/collision.mjs";
 import { Bricks } from "./modules/bricks.mjs";
-import {
-  drawBall,
-  drawPaddle,
-  drawScore,
-  drawLives,
-  draw,
-} from "./modules/draw.mjs";
+import { draw } from "./modules/draw.mjs";
 import { Game } from "./modules/game.mjs";
 
 (function main() {
@@ -22,8 +16,6 @@ import { Game } from "./modules/game.mjs";
   const brokenColor1 = "#509199"; //xxxx to display when brick hit twice
   const brokenColor2 = "#7D5099"; //xxxx to display when brick hit twice
 
-  const myScore = document.querySelector("#score");
-  const myLives = document.querySelector("#hearts");
   const livesDisplay = document.querySelector("#lives");
 
   const brickSound1 = new Audio("audio/brick1.wav");
@@ -38,10 +30,6 @@ import { Game } from "./modules/game.mjs";
 
   let dx = 3;
   let dy = -3;
-
-  const paddleHeight = 10;
-  const paddleWidth = 60;
-  let paddleX = (canvas.width - paddleWidth) / 2;
 
   let rightPressed = false;
   let leftPressed = false;
@@ -100,7 +88,7 @@ import { Game } from "./modules/game.mjs";
   //display start screen on page load
   myGame.displayScreen(myGame.startDisplay);
 
-  draw(myBricks, myGame, canvas, ctx);
+  draw(myBricks, myGame, canvas, ctx, x, y, itemColor);
 
   myBricks.drawBricks();
 
