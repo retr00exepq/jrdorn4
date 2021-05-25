@@ -11,10 +11,6 @@ export class Game {
     this.lives = 3;
     this.won = false;
   }
-  //display a screen
-  displayScreen(name) {
-    return name.classList.remove("hidden");
-  }
   start() {
     //only start game if no game is currently running
     if (this.state === 0) {
