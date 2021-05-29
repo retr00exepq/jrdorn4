@@ -39,12 +39,6 @@ export function draw(myBricks, myGame, canvas, ctx, x, y, itemColor) {
 
   //
   //sound effects
-  const startSound = new Audio("audio/start.wav");
-  const winSound = new Audio("audio/win.wav");
-  const loseSound = new Audio("audio/lose.wav");
-  const dropSound = new Audio("audio/drop.wav");
-  const wallSound = new Audio("audio/wall.wav");
-  const paddleSound = new Audio("audio/paddle.wav");
   startSound.play();
   //
   ctx.clearRect(0, 0, canvas.width, canvas.width);

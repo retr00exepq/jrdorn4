@@ -16,14 +16,6 @@ import { Game } from "./modules/game.mjs";
   const brokenColor1 = "#509199"; //xxxx to display when brick hit twice
   const brokenColor2 = "#7D5099"; //xxxx to display when brick hit twice
 
-  const livesDisplay = document.querySelector("#lives");
-
-  const brickSound1 = new Audio("audio/brick1.wav");
-  const brickSound2 = new Audio("audio/brick2.wav");
-  const brickSound3 = new Audio("audio/brick3.wav");
-  const brickSound4 = new Audio("audio/brick4.wav");
-  const brickSound5 = new Audio("audio/brick5.wav");
-
   //x and y coordinates of ball
   let x = canvas.width / 2;
   let y = canvas.height - 30;
