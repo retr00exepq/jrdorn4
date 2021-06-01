@@ -39,7 +39,7 @@ function normalizePort(val) {
 function onListening() {
   let addr = server.address();
   let bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
-  debug("Listening on " + bind);
+  console.log(`Listening on ${bind} ...`);
 }
 
 //secure HTTP headers
@@ -50,9 +50,7 @@ function onError(error) {
   if (error.syscall !== "listen") {
     throw error;
   }
-
   let bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
-
   //handle listen errors with messages
   switch (error.code) {
     case "EACCES":
@@ -68,10 +66,18 @@ function onError(error) {
   }
 }
 
-//custom errors
+//custom app errors
 app.use(function (req, res, next) {
-  if (req) {
-    // console.log(res);
+  if (Error) {
+    if (req.url.endsWith(".mjs")) {
+      console.log(req.url);
+    }
+    // res.writeHead(200, {
+    //   "Content-Type": "application/javascript",
+    // });
+
+    // console.log(req);
+    // if (!req.user) return next(createError(401, 'Please login'));
     // return next(createError(404, "Page not found"));
     // return next(createError(500, "Internal server error"));
     next();

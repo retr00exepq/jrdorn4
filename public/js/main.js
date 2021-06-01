@@ -1,7 +1,5 @@
-import { collisionDetection } from "./modules/collision.mjs";
-import { Bricks } from "./modules/bricks.mjs";
-import { draw } from "./modules/draw.mjs";
-import { Game } from "./modules/game.mjs";
+import { Game } from "./modules/index.mjs";
+console.log(Game);
 
 (function main() {
   // || Variables

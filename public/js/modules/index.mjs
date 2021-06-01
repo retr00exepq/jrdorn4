@@ -1,6 +1,6 @@
-export { Displays } from "./displays";
-export { displayScreen } from "./displayScreen";
-export { Game } from "./game";
-export { Sfx } from "./sfx";
-export { start } from "./startGame";
-export { stop } from "./stopGame";
+export { Displays } from "./displays.mjs";
+// export { displayScreen } from "./displayScreen.mjs";
+// export { Game } from "./game.mjs";
+// export { Sfx } from "./sfx.mjs";
+// export { start } from "./startGame.mjs";
+// export { stop } from "./stopGame.mjs";
