@@ -1,6 +1,12 @@
 export { Displays } from "./displays.mjs";
-// export { displayScreen } from "./displayScreen.mjs";
-// export { Game } from "./game.mjs";
-// export { Sfx } from "./sfx.mjs";
-// export { start } from "./startGame.mjs";
-// export { stop } from "./stopGame.mjs";
+export { displayScreen } from "./displayScreen.mjs";
+export { Game } from "./game.mjs";
+export { Bricks } from "./bricks.mjs";
+export { Sfx } from "./sfx.mjs";
+export { start } from "./startGame.mjs";
+export { stop } from "./stopGame.mjs";
+export { drawBall } from "./drawBall.mjs";
+export { drawBricks } from "./drawBricks.mjs";
+export { drawLives } from "./drawLives.mjs";
+export { drawPaddle } from "./drawPaddle.mjs";
+export { drawScore } from "./drawScore.mjs";

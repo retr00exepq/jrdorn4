@@ -67,22 +67,22 @@ function onError(error) {
 }
 
 //custom app errors
-app.use(function (req, res, next) {
-  if (Error) {
-    if (req.url.endsWith(".mjs")) {
-      console.log(req.url);
-    }
-    // res.writeHead(200, {
-    //   "Content-Type": "application/javascript",
-    // });
+// app.use(function (req, res, next) {
+//   if (Error) {
+//     if (req.url.endsWith(".mjs")) {
+//       console.log(req.url);
+//     }
+//     // res.writeHead(200, {
+//     //   "Content-Type": "application/javascript",
+//     // });
 
-    // console.log(req);
-    // if (!req.user) return next(createError(401, 'Please login'));
-    // return next(createError(404, "Page not found"));
-    // return next(createError(500, "Internal server error"));
-    next();
-  }
-});
+//     // console.log(req);
+//     // if (!req.user) return next(createError(401, 'Please login'));
+//     // return next(createError(404, "Page not found"));
+//     // return next(createError(500, "Internal server error"));
+//     next();
+//   }
+// });
 
 // app.get("/", (req, res) => {
 //   res.render("index.html");
