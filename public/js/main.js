@@ -1,5 +1,5 @@
+import { Bricks } from "./modules/bricks.mjs";
 import * as m from "./modules/index.mjs";
-console.log(m);
 
 (function main() {
   // || Variables
@@ -53,15 +53,13 @@ console.log(m);
     } else if (e.code === "ArrowLeft") {
       leftPressed = false;
     } else if (e.code === "Space") {
-      myGame.start();
+      //start game
+      m.start(Game, Displays, canvas, Sfx);
+      myLives.innerHTML = m.drawLives(
+        Game.lives,
+        '<img class="heart" src="img/heart.png" />'
+      );
     }
-  }
-
-  //play a random sound on brick collision
-  function randomBrick() {
-    let random = Math.floor(Math.random() * (6 - 1)) + 1;
-    random = random.toString();
-    return Function(`brickSound${random}.play();`)();
   }
 
   //////////////////////////////////////////
@@ -72,26 +70,31 @@ console.log(m);
 
   // || Run game
 
-  //brick setup
-  let myBricks = new Bricks();
-  myBricks.setUp(); //initialize bricks on page load
+  //init classes to run game
+  let Bricks = new m.Bricks();
+  let Displays = new m.Displays();
+  let Game = new m.Game();
+  let Sfx = new m.Sfx();
 
-  //functionality for starting game
-
-  let myGame = new Game(canvas);
+  //initialize bricks on page load
+  Bricks.init();
 
   //display start screen on page load
-  myGame.displayScreen(myGame.startDisplay);
+  m.displayScreen(Displays.startDisplay);
 
-  draw(myBricks, myGame, canvas, ctx, x, y, itemColor);
+  //play start sound and draw components when user presses space
+  // while (Game.state === 1) {
+  //   console.log(1);
+  //   Game.state = 0;
+  // }
 
-  myBricks.drawBricks();
+  // Sfx.startSound.play();
+  // m.drawBricks();
+  //draw ball
+  //draw paddle
+  //draw lives
+  //draw score
 
-  //
-  //draw ball on canvas
-  //draw paddle on canvas
-  //display score above canvas
-  //display hearts to count lives
   //
   //
   //
