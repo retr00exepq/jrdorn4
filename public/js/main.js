@@ -53,12 +53,13 @@ import * as m from "./modules/index.mjs";
     } else if (e.code === "ArrowLeft") {
       leftPressed = false;
     } else if (e.code === "Space") {
-      //start game
+      //start game when user presses space
       m.start(Game, Displays, canvas, Sfx);
       myLives.innerHTML = m.drawLives(
         Game.lives,
         '<img class="heart" src="img/heart.png" />'
       );
+      m.drawBricks(ctx, Bricks);
     }
   }
 
@@ -88,8 +89,6 @@ import * as m from "./modules/index.mjs";
   //   Game.state = 0;
   // }
 
-  // Sfx.startSound.play();
-  // m.drawBricks();
   //draw ball
   //draw paddle
   //draw lives
