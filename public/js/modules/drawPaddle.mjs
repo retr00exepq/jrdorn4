@@ -2,7 +2,14 @@
 //coordinates (paddleX), width(paddleWidth, height(paddleHeight), color(itemColor), context (ctx),
 //canvasHeight (canvas.height)
 
-export function drawPaddle(coords, color, context, width, height) {
+export function drawPaddle(
+  coords,
+  color,
+  context,
+  canvasHeight,
+  width,
+  height
+) {
   context.beginPath();
   context.rect(coords, canvasHeight - height, width, height);
   context.fillStyle = color;

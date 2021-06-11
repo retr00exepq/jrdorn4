@@ -54,12 +54,7 @@ import * as m from "./modules/index.mjs";
       leftPressed = false;
     } else if (e.code === "Space") {
       //start game when user presses space
-      m.start(Game, Displays, canvas, Sfx);
-      myLives.innerHTML = m.drawLives(
-        Game.lives,
-        '<img class="heart" src="img/heart.png" />'
-      );
-      m.drawBricks(ctx, Bricks);
+      run();
     }
   }
 
@@ -84,60 +79,62 @@ import * as m from "./modules/index.mjs";
   m.displayScreen(Displays.startDisplay);
 
   //play start sound and draw components when user presses space
-  // while (Game.state === 1) {
-  //   console.log(1);
-  //   Game.state = 0;
-  // }
-
-  //draw ball
-  //draw paddle
-  //draw lives
-  //draw score
-
-  //
-  //
-  //
-  //Draw game components
-  function draw() {
-    //
-
-    startSound.play();
-    //
+  function run() {
+    //start game
+    m.start(Game, Displays, canvas, Sfx);
+    //create canvas
     ctx.clearRect(0, 0, canvas.width, canvas.width);
-    // myBricks.drawBricks();
-    drawBall();
-    drawPaddle();
-    drawScore();
-    drawLives();
-    collisionDetection();
+    //draw bricks
+    m.drawBricks(ctx, Bricks, itemColor, brokenColor1, brokenColor2);
+    //draw ball
+    m.drawBall("img/ball.png", ctx, x, y);
+    //draw paddle
+    m.drawPaddle(
+      paddleX,
+      itemColor,
+      ctx,
+      canvas.height,
+      paddleWidth,
+      paddleHeight
+    );
+    //draw score
+    m.drawScore(myScore, Game.score);
+    myLives.innerHTML = m.drawLives(
+      Game.lives,
+      '<img class="heart" src="img/heart.png" />'
+    );
+    // collisionDetection();
+    //////////////////////////////
+    //////////////////////////////
+    //////////////////////////////
 
     //ball bounces off side wall
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-      wallSound.play();
+      Sfx.wallSound.play();
       dx = -dx;
     }
     //ball bounces off top wall
     if (y + dy < 1) {
-      wallSound.play();
+      Sfx.wallSound.play();
       dy = -dy;
     } else if (y + dy > canvas.height - ballRadius) {
       if (x > paddleX && x < paddleX + paddleWidth) {
         //paddle collision
-        paddleSound.play();
+        Sfx.paddleSound.play();
         dy = -dy;
       } else {
         //ball hit ground
         dropSound.play();
-        myGame.lives--;
-        if (!myGame.lives) {
+        Game.lives--;
+        if (!Game.lives) {
           //display lose screen, exit game and hide canvas/ score/ lives
           loseSound.play();
           myBricks.setUp();
           displayScreen("loseDisplay");
           canvas.classList.add("hidden");
           slDisplay.classList.add("hidden");
-          myGame.stop();
-          myGame.lives = 4;
+          Game.stop();
+          Game.lives = 4;
           return;
         } else {
           x = canvas.width / 2;
@@ -160,46 +157,50 @@ import * as m from "./modules/index.mjs";
     y += dy;
 
     //exit when game won
-    if (myGame.won === true) {
-      myGame.won = false;
+    if (Game.won === true) {
+      Game.won = false;
       return;
     }
 
-    requestAnimationFrame(draw);
+    requestAnimationFrame(run);
   }
+
+  //
+  //
+  //
   //
   //
   //
   function collisionDetection() {
-    for (let c = 0; c < myBricks.brickColumnCount; c++) {
-      for (let r = 0; r < myBricks.brickRowCount; r++) {
-        let b = myBricks.bricks[c][r];
+    for (let c = 0; c < Bricks.brickColumnCount; c++) {
+      for (let r = 0; r < Bricks.brickRowCount; r++) {
+        let b = Bricks.bricks[c][r];
         if (b.health > 0) {
           if (
             x > b.x &&
-            x < b.x + myBricks.brickWidth &&
+            x < b.x + Bricks.brickWidth &&
             y > b.y &&
-            y < b.y + myBricks.brickHeight
+            y < b.y + Bricks.brickHeight
           ) {
             //handle brick collision
             randomBrick();
             dy = -dy;
             b.health--;
             if (b.health === 0) {
-              myGame.score++;
+              Game.score++;
             }
             //level won when all bricks are smashed
             if (
-              myGame.score ===
-              myBricks.brickRowCount * myBricks.brickColumnCount
+              Game.score ===
+              Bricks.brickRowCount * myBricks.brickColumnCount
             ) {
               winSound.play();
-              myBricks.setUp();
+              Bricks.setUp();
               displayScreen("winDisplay");
               canvas.classList.add("hidden");
               slDisplay.classList.add("hidden");
-              myGame.stop();
-              myGame.won = true;
+              Game.stop();
+              Game.won = true;
             }
           }
         }
@@ -207,3 +208,30 @@ import * as m from "./modules/index.mjs";
     }
   }
 })();
+
+// function frame() {
+//   ctx.clearRect(0, 0, canvas.width, canvas.width);
+//   drawBricks();
+//   myBricks.drawBricks();
+//   drawBall();
+//   drawPaddle();
+//   drawScore();
+//       if (!myGame.lives) {
+//         //display lose screen, exit game and hide canvas/ score/ lives
+//         loseSound.play();
+//         myBricks.setUp();
+//         displayScreen("loseDisplay");
+//         canvas.classList.add("hidden");
+//         slDisplay.classList.add("hidden");
+
+//   x += dx;
+//   y += dy;
+
+//   //exit when game won
+//   if (myGame.won === true) {
+//     myGame.won = false;
+//     return;
+//   }
+
+//   requestAnimationFrame(frame);
+// }
