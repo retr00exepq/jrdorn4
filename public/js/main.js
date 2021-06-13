@@ -1,4 +1,3 @@
-import { Bricks } from "./modules/bricks.mjs";
 import * as m from "./modules/index.mjs";
 
 (function main() {
@@ -82,12 +81,16 @@ import * as m from "./modules/index.mjs";
   function run() {
     //start game
     m.start(Game, Displays, canvas, Sfx);
+
     //create canvas
     ctx.clearRect(0, 0, canvas.width, canvas.width);
+
     //draw bricks
     m.drawBricks(ctx, Bricks, itemColor, brokenColor1, brokenColor2);
+
     //draw ball
     m.drawBall("img/ball.png", ctx, x, y);
+
     //draw paddle
     m.drawPaddle(
       paddleX,
@@ -97,22 +100,23 @@ import * as m from "./modules/index.mjs";
       paddleWidth,
       paddleHeight
     );
+
     //draw score
     m.drawScore(myScore, Game.score);
     myLives.innerHTML = m.drawLives(
       Game.lives,
       '<img class="heart" src="img/heart.png" />'
     );
-    // collisionDetection();
-    //////////////////////////////
-    //////////////////////////////
-    //////////////////////////////
+
+    //handle collision when ball hits brick
+    m.collisionDetection(Bricks, Game, Sfx, Displays, canvas, x, y, dy);
 
     //ball bounces off side wall
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
       Sfx.wallSound.play();
       dx = -dx;
     }
+
     //ball bounces off top wall
     if (y + dy < 1) {
       Sfx.wallSound.play();
@@ -124,16 +128,16 @@ import * as m from "./modules/index.mjs";
         dy = -dy;
       } else {
         //ball hit ground
-        dropSound.play();
+        Sfx.dropSound.play();
         Game.lives--;
         if (!Game.lives) {
           //display lose screen, exit game and hide canvas/ score/ lives
-          loseSound.play();
-          myBricks.setUp();
-          displayScreen("loseDisplay");
+          Sfx.loseSound.play();
+          Bricks.init();
+          m.displayScreen(Displays.loseDisplay);
           canvas.classList.add("hidden");
-          slDisplay.classList.add("hidden");
-          Game.stop();
+          Displays.slDisplay.classList.add("hidden");
+          m.stop(Game);
           Game.lives = 4;
           return;
         } else {
@@ -153,6 +157,7 @@ import * as m from "./modules/index.mjs";
       paddleX -= 5;
     }
 
+    //increment ball coords
     x += dx;
     y += dy;
 
@@ -162,76 +167,7 @@ import * as m from "./modules/index.mjs";
       return;
     }
 
+    //display next frame of game
     requestAnimationFrame(run);
   }
-
-  //
-  //
-  //
-  //
-  //
-  //
-  function collisionDetection() {
-    for (let c = 0; c < Bricks.brickColumnCount; c++) {
-      for (let r = 0; r < Bricks.brickRowCount; r++) {
-        let b = Bricks.bricks[c][r];
-        if (b.health > 0) {
-          if (
-            x > b.x &&
-            x < b.x + Bricks.brickWidth &&
-            y > b.y &&
-            y < b.y + Bricks.brickHeight
-          ) {
-            //handle brick collision
-            randomBrick();
-            dy = -dy;
-            b.health--;
-            if (b.health === 0) {
-              Game.score++;
-            }
-            //level won when all bricks are smashed
-            if (
-              Game.score ===
-              Bricks.brickRowCount * myBricks.brickColumnCount
-            ) {
-              winSound.play();
-              Bricks.setUp();
-              displayScreen("winDisplay");
-              canvas.classList.add("hidden");
-              slDisplay.classList.add("hidden");
-              Game.stop();
-              Game.won = true;
-            }
-          }
-        }
-      }
-    }
-  }
 })();
-
-// function frame() {
-//   ctx.clearRect(0, 0, canvas.width, canvas.width);
-//   drawBricks();
-//   myBricks.drawBricks();
-//   drawBall();
-//   drawPaddle();
-//   drawScore();
-//       if (!myGame.lives) {
-//         //display lose screen, exit game and hide canvas/ score/ lives
-//         loseSound.play();
-//         myBricks.setUp();
-//         displayScreen("loseDisplay");
-//         canvas.classList.add("hidden");
-//         slDisplay.classList.add("hidden");
-
-//   x += dx;
-//   y += dy;
-
-//   //exit when game won
-//   if (myGame.won === true) {
-//     myGame.won = false;
-//     return;
-//   }
-
-//   requestAnimationFrame(frame);
-// }

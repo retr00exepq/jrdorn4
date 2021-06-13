@@ -11,3 +11,4 @@ export { drawBricks } from "./drawBricks.mjs";
 export { drawLives } from "./drawLives.mjs";
 export { drawPaddle } from "./drawPaddle.mjs";
 export { drawScore } from "./drawScore.mjs";
+export { collisionDetection } from "./collisionDetection.mjs";
