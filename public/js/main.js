@@ -109,7 +109,7 @@ import * as m from "./modules/index.mjs";
     );
 
     //handle collision when ball hits brick
-    m.collisionDetection(Bricks, Game, Sfx, Displays, canvas, x, y, dy);
+    m.collisionDetection(Bricks, Game, Sfx, Displays, canvas, x, y, dy, m);
 
     //ball bounces off side wall
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {

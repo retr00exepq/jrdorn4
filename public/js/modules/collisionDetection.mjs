@@ -7,7 +7,8 @@ export function collisionDetection(
   canvas,
   x,
   y,
-  dy
+  dy,
+  m
 ) {
   for (let c = 0; c < Bricks.brickColumnCount; c++) {
     for (let r = 0; r < Bricks.brickRowCount; r++) {
@@ -20,17 +21,17 @@ export function collisionDetection(
           y < b.y + Bricks.brickHeight
         ) {
           //handle brick collision
-          randomBrick();
+          m.randomSound("brickSound", Sfx); //play random sound on collision
           dy = -dy;
           b.health--;
           if (b.health === 0) {
             Game.score++;
           }
           //level won when all bricks are smashed
-          if (Game.score === Bricks.brickRowCount * myBricks.brickColumnCount) {
+          if (Game.score === Bricks.brickRowCount * Bricks.brickColumnCount) {
             Sfx.winSound.play();
             Bricks.setUp();
-            displayScreen("winDisplay");
+            m.displayScreen("winDisplay");
             canvas.classList.add("hidden");
             Displays.slDisplay.classList.add("hidden");
             Game.stop();
