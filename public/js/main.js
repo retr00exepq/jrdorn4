@@ -71,6 +71,16 @@ import * as m from "./modules/index.mjs";
   let Game = new m.Game();
   let Sfx = new m.Sfx();
 
+  //
+  //
+  //reverse direction of travel upon brick collision
+  // Sfx.addEventListener("test", (event) => {
+  //   console.log(event);
+  // });
+  //
+  //
+  //
+
   //initialize bricks on page load
   Bricks.init();
 

@@ -3,7 +3,6 @@ export { displayScreen } from "./displayScreen.mjs";
 export { Game } from "./game.mjs";
 export { Bricks } from "./bricks.mjs";
 export { Sfx } from "./sfx.mjs";
-export { randomSound } from "./randomSound.mjs";
 export { start } from "./start.mjs";
 export { stop } from "./stop.mjs";
 export { drawBall } from "./drawBall.mjs";
