@@ -10,4 +10,7 @@ export { drawBricks } from "./drawBricks.mjs";
 export { drawLives } from "./drawLives.mjs";
 export { drawPaddle } from "./drawPaddle.mjs";
 export { drawScore } from "./drawScore.mjs";
-export { collisionDetection } from "./collisionDetection.mjs";
+export { brickCollision } from "./brickCollision.mjs";
+export { wallCollision } from "./wallCollision.mjs";
+export { Vars } from "./vars.mjs";
+export { movePaddle } from "./movePaddle.mjs";

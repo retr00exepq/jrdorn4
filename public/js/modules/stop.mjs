@@ -5,5 +5,6 @@ export function stop(game) {
   game.state = 0;
   game.score = 0;
   game.lives = 3;
+  game.won = false;
   return game;
 }

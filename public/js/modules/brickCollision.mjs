@@ -1,5 +1,5 @@
-//handle collision for ball and bricks
-export function collisionDetection(
+//handle brick collision
+export function brickCollision(
   Bricks,
   Game,
   Sfx,
@@ -22,7 +22,6 @@ export function collisionDetection(
         ) {
           //handle brick collision
           Sfx.randomBrickSound();
-          console.log(0);
           dy = -dy;
           ///
           //TODO: reverse direction of travel upon brick collision
@@ -35,11 +34,11 @@ export function collisionDetection(
           if (Game.score === Bricks.brickRowCount * Bricks.brickColumnCount) {
             Sfx.winSound.play();
             Bricks.init();
-            m.displayScreen("winDisplay");
+            m.displayScreen(Displays.winDisplay);
             canvas.classList.add("hidden");
             Displays.slDisplay.classList.add("hidden");
-            Game.stop();
             Game.won = true;
+            m.stop(Game);
           }
         }
       }
