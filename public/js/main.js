@@ -7,31 +7,6 @@ import * as m from "./modules/index.mjs";
 //Move paddle module
 
 (function () {
-  // || Variables
-
-  // const myScore = document.querySelector("#score");
-  // const myLives = document.querySelector("#hearts");
-  // const canvas = document.querySelector("canvas");
-  // canvas.width = 400;
-  // canvas.height = 250;
-  // const ctx = canvas.getContext("2d");
-
-  // const itemColor = "#6c9950"; //green
-  // const brokenColor1 = "#509199"; //xxxx to display when brick hit twice
-  // const brokenColor2 = "#7D5099"; //xxxx to display when brick hit twice
-
-  // const paddleHeight = 10;
-  // const paddleWidth = 60;
-  // let paddleX = (canvas.width - paddleWidth) / 2; // x coordinates of paddle
-  // let rightPressed = false;
-  // let leftPressed = false;
-
-  // const ballRadius = 15;
-  // let x = canvas.width / 2; //x coordinates of ball
-  // let y = canvas.height - 30; //y coordinates of ball
-  // let dx = 3;
-  // let dy = -3;
-
   // || Event Listeners
   document.addEventListener("keydown", keyDownHandler, false);
   document.addEventListener("keyup", keyUpHandler, false);
@@ -88,11 +63,11 @@ import * as m from "./modules/index.mjs";
     m.start(Game, Displays, Vars.canvas, Sfx);
 
     //create canvas
-    ctx.clearRect(0, 0, Vars.canvas.width, Vars.canvas.width);
+    Vars.ctx.clearRect(0, 0, Vars.canvas.width, Vars.canvas.width);
 
     //draw bricks
     m.drawBricks(
-      ctx,
+      Vars.ctx,
       Bricks,
       Vars.itemColor,
       Vars.brokenColor1,
