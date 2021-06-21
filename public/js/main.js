@@ -4,7 +4,7 @@ import * as m from "./modules/index.mjs";
 //Bounce in opp direction on brick contact
 //Mod wall collision
 //Restart after spacebar on win screen
-//Move paddle module
+//Tutorial/onboarding
 
 (function () {
   // || Event Listeners
@@ -17,9 +17,9 @@ import * as m from "./modules/index.mjs";
   function keyDownHandler(e) {
     e.preventDefault(); //prevent page from moving
     if (e.code === "ArrowRight") {
-      rightPressed = true;
+      Vars.rightPressed = true;
     } else if (e.code === "ArrowLeft") {
-      leftPressed = true;
+      Vars.leftPressed = true;
     }
     //handle spacebar, include closure for state?
   }
@@ -27,20 +27,14 @@ import * as m from "./modules/index.mjs";
   //stop moving paddle when arrow key released
   function keyUpHandler(e) {
     if (e.code === "ArrowRight") {
-      rightPressed = false;
+      Vars.rightPressed = false;
     } else if (e.code === "ArrowLeft") {
-      leftPressed = false;
+      Vars.leftPressed = false;
     } else if (e.code === "Space") {
       //start game when user presses space
       run();
     }
   }
-
-  //////////////////////////////////////////
-  // function muteUmute() {
-  //   let muteButton = document.createElement("button");
-  // }
-  //////////////////////////////////////////
 
   // || Run game
 
@@ -88,8 +82,8 @@ import * as m from "./modules/index.mjs";
     );
 
     //draw score
-    m.drawScore(myScore, Game.score);
-    myLives.innerHTML = m.drawLives(
+    m.drawScore(Vars.myScore, Game.score);
+    Vars.myLives.innerHTML = m.drawLives(
       Game.lives,
       '<img class="heart" src="img/heart.png" />'
     );
@@ -107,12 +101,29 @@ import * as m from "./modules/index.mjs";
       m
     );
 
+    //handle collision when ball hits wall
+    m.wallCollision(
+      Sfx,
+      Vars.canvas,
+      Vars.ballRadius,
+      Vars.x,
+      Vars.y,
+      Vars.dx,
+      Vars.dy,
+      Vars.paddleX,
+      Vars.paddleWidth,
+      Game,
+      Bricks,
+      Displays,
+      m
+    );
+
     //handle paddle movement
-    m.movePaddle();
+    Vars = m.movePaddle(Vars);
 
     //increment ball coords
-    x += dx;
-    y += dy;
+    Vars.x += Vars.dx;
+    Vars.y += Vars.dy;
 
     //exit when game won
     // if (Game.won === true) {

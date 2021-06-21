@@ -1,8 +1,12 @@
 //move paddle back and forth
-export function movePaddle() {
-  if (rightPressed && paddleX < canvas.width - paddleWidth) {
-    paddleX += 5;
-  } else if (leftPressed && paddleX > 0) {
-    paddleX -= 5;
+export function movePaddle(Vars) {
+  if (
+    Vars.rightPressed &&
+    Vars.paddleX < Vars.canvas.width - Vars.paddleWidth
+  ) {
+    Vars.paddleX += 5;
+  } else if (Vars.leftPressed && Vars.paddleX > 0) {
+    Vars.paddleX -= 5;
   }
+  return Vars;
 }
